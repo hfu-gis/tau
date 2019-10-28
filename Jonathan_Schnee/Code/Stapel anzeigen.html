@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Static Demo Page</title>
+        
+        <meta name='viewport'    content='width=device-width'>
+        <meta name='description' content=''>
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+        <link rel='stylesheet' type='text/css' href='./main.css'>
+        <style>
+            * {
+                font-family: 'Roboto Condensed', sans-serif;
+            }
+            body {
+                margin: 0;
+                background-color: rgb(240, 240, 240);
+                padding: 0;
+            }
+            main {
+                margin: 0 auto;
+                width: 30%;
+            }
+            nav {
+                background-color: #fff;
+                height: 3rem;
+                width: 100%;
+                border-bottom: 3px solid #008a54;
+            }
+            nav img {
+                height: 100%;
+            }
+
+            .shadow {
+                box-shadow: 1px 1px 0.1rem 1px rgba(0, 0, 0, 0.1);
+            }
+
+            .box {
+                background-color: white;
+                padding: 4rem;
+                border-radius: 0.5rem;
+                margin: 1rem 0;
+                font-size: 3rem;
+                text-align: center;
+            }
+
+            .box :focus {
+                border-bottom: 2px solid #008a54;
+            }
+
+        </style>
+    </head>
+    <body>
+        <nav>
+            <img src='https://stundenplan.hs-furtwangen.de/splan/mobile/pictures/orgLogoLarge.png'>
+        </nav>
+        <main>
+            <form>
+                <div class='box shadow' onclick="location.href='test';" style="cursor: pointer;">
+                    <p>GIS</p>
+                </div>
+                <div class='box shadow' onclick="location.href='test';" style="cursor: pointer;">
+                    <p>MATHE</p>
+                </div>
+                <div class='box shadow' onclick="location.href='test';" style="cursor: pointer;">
+                    <p>CG</p>
+                </div>
+                <div class='box shadow' onclick="location.href='test';" style="cursor: pointer;">
+                    <p>UX DESIGN</p>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>
