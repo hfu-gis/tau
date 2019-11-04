@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Static Demo Page</title>
+        <title>Karte erstellen</title>
         
         <meta name='viewport'    content='width=device-width'>
         <meta name='description' content=''>
@@ -14,30 +14,33 @@
             <img src='https://stundenplan.hs-furtwangen.de/splan/mobile/pictures/orgLogoLarge.png'>
         </nav>
         <main>
+            <header>
+                <h1>Karte erstellen</h1>
+            </header>
             <form>
-                <div class='box'>
-                    <p>Deck</p>
+                <section class='box'>
+                    <h3>Deck auswählen</h3>
                     <select>
                         <option value="GIS">GIS</option>
                         <option value="UXDesign">UXDesign</option>
                         <option value="Mathe Sim.">Mathe Sim.</option>
                     </select>
-                </div>
-                <div class='box'>
-                    <p>Vorne</p>
-                    <textarea rows='1'></textarea>
-                </div>
-                <div class='box'>
-                    <p>Hinten</p>
-                    <textarea rows='1'></textarea>
-                </div>
-                <div class='box tags'>
-                    <p>Tags</p>
+                </section>
+                <section class='box'>
+                    <h3>Karte Vorderseite</h3>
+                    <textarea rows='3'></textarea>
+                </section>
+                <section class='box'>
+                    <h3>Karte Rückseite</h3>
+                    <textarea rows='3'></textarea>
+                </section>
+                <section class='box tags'>
+                    <h3>Tags</h3>
                     <input type='text' name='tags'></input>
-                </div>
-                <div class='submit'>
+                </section>
+                <section class='submit'>
                     <button>Speichern</button>
-                </div>
+                </section>
             </form>
         </main>
     </body>
