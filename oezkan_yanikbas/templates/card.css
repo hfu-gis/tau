@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400&display=swap');
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: rgb(245, 245, 245);
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    main {
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    main {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+article {    
+    position: relative;
+    bottom: 0;
+    background-color: white;
+    margin: 1rem;
+    padding: 2rem;
+    transition: 0.2s ease all;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.2rem 0.3rem 0.3rem rgba(0, 0, 0, 0.1);
+}
+
+article:hover{
+    bottom: 1rem;
+}
+
+
+article header h4 {
+    color: #2dce89;
+    text-transform: uppercase;
+}
+
+article p {
+    color: #525f7f;
+    font-weight: 300;
+    line-height: 1.5em;
+}
+
+button {
+    background-color: #2dce89;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul li {
+    display: inline-block;
+    margin: 0.5rem 0;
+    padding: 0.3rem 0.6rem;
+    color: #1aae6f;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.6em;
+    border-radius: 1rem;
+    background-color: rgba(147,231,195,.5);
+}
