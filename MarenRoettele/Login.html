@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+
+  <meta name='viewport'    content='width=device-width'>
+  <meta name='description' content=''>
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+  <link rel='stylesheet' type='text/css' href='./main.css'>
+  <style>
+    * {
+      font-family: 'Roboto Condensed', sans-serif;
+    }
+    body {
+      margin: 0;
+      background-color: rgb(240, 240, 240);
+      padding: 0;
+    }
+    main {
+      margin: 0 auto;
+      width: 30%;
+    }
+    nav {
+      background-color: #fff;
+      height: 3rem;
+      width: 100%;
+      border-bottom: 3px solid #008a54;
+    }
+    nav img {
+      height: 100%;
+    }
+    form textarea{
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      border: none;
+      border-bottom: 1px solid black;
+
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .input {
+      width: 100%;
+    }
+
+
+    .shadow {
+      box-shadow: 1px 1px 0.1rem 1px rgba(0, 0, 0, 0.1);
+    }
+
+    .box {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .box :focus {
+      border-bottom: 2px solid #008a54;
+    }
+
+    .submit {
+      text-align: center;
+    }
+
+    button {
+      border-radius: 0.5rem;
+      border: none;
+      padding: 1rem;
+      background-color: #008a54;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <img src='https://stundenplan.hs-furtwangen.de/splan/mobile/pictures/orgLogoLarge.png'>
+</nav>
+<main>
+  <form>
+
+      <h1>Login</h1>
+
+    <div class='box shadow'>
+      <label>Benutzername
+        <br></br>
+        <input class="input" type="text" name="username" >
+        <br></br>
+      </label>
+      <label>Passwort
+        <br></br>
+        <input class="input" type="password" name="password" >
+        <br></br>
+      </label>
+
+      <input type="checkbox" name="speichern"/> Passwort speichern
+      <br> </br>
+      <a href="#" id="forgot">Passwort vergessen?</a>
+    </div>
+
+    <div class='submit'>
+      <button class='shadow' type='submit'>Anmelden</button>
+    </div>
+  </form>
+</main>
+</body>
+</html>
