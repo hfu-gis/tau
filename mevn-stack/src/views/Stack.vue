@@ -2,7 +2,7 @@
     <div class="stacks" >
     <h1 class="display 2">1.Semester</h1>
     <v-layout row wrap>
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">AUDIOTECH</p>
@@ -18,7 +18,7 @@
             </v-card>   
         </v-flex>
 
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">MATHE</p>
@@ -34,7 +34,7 @@
             </v-card>
         </v-flex>
 
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">PROG</p>
@@ -50,7 +50,7 @@
             </v-card>
         </v-flex>
 
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">PHYSIK</p>
@@ -70,7 +70,7 @@
     
     <h1 class="display 2">2.Semester</h1>
     <v-layout row wrap>
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">GIS</p>
@@ -86,7 +86,7 @@
             </v-card>   
         </v-flex>
 
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">MATHE</p>
@@ -102,7 +102,7 @@
             </v-card>
         </v-flex>
 
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">UX-DESIGN</p>
@@ -118,7 +118,7 @@
             </v-card>
         </v-flex>
 
-        <v-flex xs12 lg3 class="my-2">
+        <v-flex xs12 md6 lg3 class="my-2">
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">CD</p>
