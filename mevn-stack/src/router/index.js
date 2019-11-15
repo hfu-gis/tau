@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
 import Stack from '../views/Stack.vue'
+import Login from '../components/Login.vue'
+import Dashboard from '../components/Dashboard.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
+  { 
     path: '/',
     name: 'home',
     component: Home
@@ -24,6 +25,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/user/dashboard',
+    name: 'dashboard',
+    component: Dashboard
   },
   {
     path: '/stacks',
