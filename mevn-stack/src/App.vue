@@ -1,11 +1,26 @@
 <template>
-  <div id="app">
+  <v-app id="app">
+    <NavBar/>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/login">Login</router-link>
     <router-view/>
-  </div>
+  </v-app>
 </template>
+
+<script>
+  import NavBar from '@/views/NavBar'
+
+  export default {
+    name:'App',
+    components: {NavBar},
+    data () {
+      return {
+
+      }
+    }
+  }
+</script>
 
 <style lang="scss">
 #app {
