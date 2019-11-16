@@ -1,14 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
 
+import Landing from '../components/Landing.vue'
+import Home from '../views/Home.vue'
+import Stack from '../views/Stack.vue'
+import Login from '../components/Login.vue'
+import Dashboard from '../components/Dashboard.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
+  { 
     path: '/',
+    name: 'landing',
+    component: Landing
+  },
+  {
+    path: '/home',
     name: 'home',
     component: Home
   },
@@ -25,6 +33,16 @@ const routes = [
     name: 'login',
     component: Login
   },
+  {
+    path: '/user/dashboard',
+    name: 'dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/stacks',
+    name: 'stacks',
+    component: Stack
+  }
 ]
 
 const router = new VueRouter({
