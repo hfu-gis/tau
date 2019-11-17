@@ -2,7 +2,8 @@
     <nav>
     <!-- Toolbar Menu-->
     <v-toolbar color=''>
-        <v-app-bar-nav-icon 
+        <v-app-bar-nav-icon
+            class='d-flex d-sm-none' 
             color='#000' 
             @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
@@ -63,11 +64,12 @@
             return {
                 drawer: false,
                 items: [
-                    {text: 'Profil', route: '/'},
-                    {text: 'Stapel erstellen', route: '/'},
-                    {text: 'Meine Stapel', route: '/'},
-                    {text: 'Suche', route: '/'},
-                    {text: 'Einstellungen', route: '/'},
+                    {text: 'Login', route: '/auth/login'},
+                    {text: 'Landing', route: '/'},
+                    {text: 'Create',  route: '/deck/create'},
+                    {text: 'Decks',   route: '/deck/'},
+                    {text: 'About',   route: '/about'},
+                    {text: 'Profile', route: '/user/profile'},
                 ],
                 disabled: false,
                 absolute: false,
