@@ -1,28 +1,39 @@
 <template>
 <div>
-    <v-timeline>
-    <v-timeline-item
-      v-for="(data, i) in timeline"
-      :key="i"
-      :color="data.color"
-      small
-    >
-      <template v-slot:opposite>
-        <span
-          :class="`headline font-weight-bold ${data.color}--text`"
-          v-text="data.year"
-        ></span>
-      </template>
-      <div class="py-4">
-        <h2 :class="`headline font-weight-light mb-4 ${data.color}--text`">{{ data.title }}</h2>
-        <div>
-          {{ data.text }}
+  <v-card id='timeline-container'>
+    <v-timeline id='timeline'>
+      <v-timeline-item
+        v-for="(data, i) in timeline"
+        :key="i"
+        :color="data.color"
+        small
+      >
+        <template v-slot:opposite>
+          <span
+            :class="`headline font-weight-bold ${data.color}--text`"
+            v-text="data.year"
+          ></span>
+        </template>
+        <div class="py-4">
+          <h2 :class="`headline font-weight-light mb-4 ${data.color}--text`">{{ data.title }}</h2>
+          <div>
+            {{ data.text }}
+          </div>
         </div>
-      </div>
-    </v-timeline-item>
-  </v-timeline>
+      </v-timeline-item>
+    </v-timeline>
+  </v-card>
 </div>
 </template>
+
+<style>
+  #timeline-container {
+    margin: 2rem 1rem;
+  }
+  #timeline {
+    padding: 1rem;
+  }
+</style>
 
 <script>
 export default {
