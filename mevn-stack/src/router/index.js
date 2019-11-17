@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import Landing from '../components/Landing.vue'
 import Home from '../views/Home.vue'
 import Stack from '../views/Stack.vue'
+import Search from '../views/Search'
 import Login from '../components/Login.vue'
 import Dashboard from '../components/Dashboard.vue'
 
@@ -42,7 +43,12 @@ const routes = [
     path: '/stacks',
     name: 'stacks',
     component: Stack
-  }
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: Search
+  },
 ]
 
 const router = new VueRouter({

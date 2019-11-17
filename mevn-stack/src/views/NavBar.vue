@@ -67,7 +67,7 @@
                     {text: 'Profil', route: '/'},
                     {text: 'Stapel erstellen', route: '/'},
                     {text: 'Meine Stapel', route: '/'},
-                    {text: 'Suche', route: '/'},
+                    {text: 'Suche', route: '/search'},
                     {text: 'Einstellungen', route: '/'},
                 ],
                 disabled: false,
