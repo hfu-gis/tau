@@ -1,8 +1,8 @@
 <template>
     <nav>
 <!-- Toolbar Menu-->
-        <v-toolbar flat app>
-            <v-row align="left" justify="left">
+        <v-toolbar flat>
+            <v-row >
                 <v-img src ="https://upload.wikimedia.org/wikipedia/de/5/57/Hochschule_Furtwangen_HFU_logo.svg"
                        max-width="150"
                        max-height="100">
@@ -13,7 +13,7 @@
             </v-row>
 
      <!--Navigations Button (BurgerMenu)-->
-            <v-btn class= "hidden-md-and-up" color="#01905A" dark @click="drawer = !drawer">Menu</v-btn>
+            <v-btn class= "hidden-lg-and-up" color="#01905A" dark @click="drawer = !drawer">Menu</v-btn>
     <!-- Dropdown-Menu -->
             <v-menu
                     v-model="value"
@@ -32,7 +32,7 @@
                 <v-list>
                     <v-list-item
                             v-for="(item, index) in items" :key="index" router :to="item.route">
-                        <v-list-item-title>{{ item.text }}</v-list-item-title>
+                        <v-list-item-title v-text="item.text"></v-list-item-title>
                     </v-list-item>
                 </v-list>
             </v-menu>
