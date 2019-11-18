@@ -1,10 +1,6 @@
 <template>
   <main>
-    <header>
-      <img src='../assets/hfu_logo.svg'>
-    </header>
-
-    <v-card>
+    <v-card class='mt-6'>
       <v-form
         v-if='!isLoading'
         ref='form'>
