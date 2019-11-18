@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Landing from '../components/Landing.vue'
-import Home from '../views/Home.vue'
+import Home from '../components/Home.vue'
 import Stack from '../views/Stack.vue'
 import Search from '../views/Search'
 import Login from '../components/Login.vue'
