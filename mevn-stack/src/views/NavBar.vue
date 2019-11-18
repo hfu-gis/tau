@@ -17,7 +17,7 @@
                     </v-list-item-content>
                 </v-list-item>
             </template>
-
+            
             <v-divider></v-divider>
             <v-list dense>
                 <v-list-item v-for="item in items" :key="item.text" link>
@@ -30,13 +30,26 @@
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
+            <template v-slot:append>
+                <div class="pa-2">
+                    <v-btn block>
+                        <v-icon>mdi-logout</v-icon>
+                        Logout
+                    </v-btn>
+                </div>
+            </template>
         </v-navigation-drawer>
 
         <v-app-bar
             app
-            color="primary"
+            color="grey darken-3"
             dark>
-            <v-toolbar-title>App</v-toolbar-title>
+            <v-img src ="https://upload.wikimedia.org/wikipedia/de/5/57/Hochschule_Furtwangen_HFU_logo.svg"
+                   max-width="150"
+                   max-height="100">
+            </v-img>
+            <v-toolbar-title class="text-uppercase dark">Studycards
+            </v-toolbar-title>
             <v-spacer />
             <v-list-item-action
                 class='d-none d-sm-flex'>
@@ -62,11 +75,11 @@
         data: () => ({
             drawer: false,
             items: [
-                { icon: 'mdi-account', text: 'Most Popular' },
-                { icon: 'mdi-account', text: 'Subscriptions' },
-                { icon: 'mdi-account', text: 'History' },
-                { icon: 'mdi-account', text: 'Playlists' },
-                { icon: 'mdi-account', text: 'Watch Later' },
+                { icon: 'mdi-magnify', text: 'Suche' },
+                { icon: 'mdi-home', text: 'Startseite' },
+                { icon: 'mdi-folder', text: 'Stapel ansehen' },
+                { icon: 'mdi-folder-plus', text: 'Stapel erstellen' },
+                { icon: 'mdi-settings', text: 'Einstellungen' },
             ],
         }),
     }
