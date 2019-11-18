@@ -1,6 +1,5 @@
 <template>
     <div class = "search">
-        <h1>Suche</h1>
         <v-container fluid>
             <v-data-iterator
                     :items="items"
@@ -24,6 +23,7 @@
                                 flat
                                 solo-inverted
                                 hide-details
+                                prepend-inner-icon="mdi-magnify"
                                 label="Suche"
                         ></v-text-field>
                         <template v-if="$vuetify.breakpoint.mdAndUp">
@@ -34,8 +34,10 @@
                                     solo-inverted
                                     hide-details
                                     :items="keys"
+                                    prepend-inner-icon="mdi-magnify"
                                     label="Sortieren nach"
                             ></v-select>
+
                             <v-spacer></v-spacer>
                             <v-btn-toggle
                                     v-model="sortDesc"
@@ -46,16 +48,16 @@
                                         depressed
                                         color="grey lighten-1"
                                         :value="false"
-                                > up
-                                    <!--<v-icon>mdi-arrow-up</v-icon>-->
+                                >
+                                    <v-icon>mdi-chevron-up</v-icon>
                                 </v-btn>
                                 <v-btn
                                         large
                                         depressed
                                         color="grey darken-1"
                                         :value="true"
-                                >down
-                                    <!--<v-icon>mdi-arrow-down</v-icon>-->
+                                >
+                                    <v-icon>mdi-chevron-down</v-icon>
                                 </v-btn>
                             </v-btn-toggle>
                         </template>
@@ -104,7 +106,7 @@
                                         v-on="on"
                                 >
                                     {{ itemsPerPage }}
-                                    <!--<v-icon>mdi-chevron-down</v-icon>-->
+                                    <v-icon>mdi-chevron-down</v-icon>
                                 </v-btn>
                             </template>
                             <v-list>
@@ -122,7 +124,7 @@
 
                         <span
                                 class="mr-4
-            grey--text"
+                                grey--text"
                         >
             Seite {{ page }} von {{ numberOfPages }}
           </span>
@@ -132,8 +134,8 @@
                                 color="grey lighten-1"
                                 class="mr-1"
                                 @click="formerPage"
-                        >pre
-                            <!--<v-icon>mdi-chevron-left</v-icon>-->
+                        >
+                            <v-icon>mdi-chevron-left</v-icon>
                         </v-btn>
                         <v-btn
                                 fab
@@ -141,8 +143,8 @@
                                 color="grey darken-1"
                                 class="ml-1"
                                 @click="nextPage"
-                        >next
-                            <!--<v-icon>mdi-chevron-right</v-icon>-->
+                        >
+                            <v-icon>mdi-chevron-right</v-icon>
                         </v-btn>
                     </v-row>
                 </template>
