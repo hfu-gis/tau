@@ -47,12 +47,26 @@
             app
             color="primary"
             dark>
-            <v-toolbar-title>Studycards
-            </v-toolbar-title>
-            <v-spacer />
+                <v-toolbar-title>
+                    <router-link to='/home'>
+                        StudyCards
+                    </router-link>
+                </v-toolbar-title>
+            <v-spacer/>
             <v-list-item-action
-                class='d-none d-sm-flex'>
-                <v-icon>mdi-account</v-icon>
+                class='d-none d-sm-flex'
+                v-for="(el, i) in navItems" 
+                :key='i'>
+                <v-btn 
+                    color='primary' 
+                    depressed 
+                    x-small 
+                    rounded 
+                    link 
+                    fab 
+                    :to="el.to">
+                    <v-icon>{{ el.icon }}</v-icon>
+                </v-btn>
             </v-list-item-action>
             <v-app-bar-nav-icon 
                 @click.stop="drawer = !drawer"
@@ -74,16 +88,23 @@
         data: () => ({
             drawer: false,
             items: [
-                { icon: 'mdi-magnify', text: 'Suche' },
-                { icon: 'mdi-home', text: 'Startseite' },
-                { icon: 'mdi-folder', text: 'Stapel ansehen' },
+                { icon: 'mdi-magnify',     text: 'Suche' },
+                { icon: 'mdi-home',        text: 'Startseite' },
+                { icon: 'mdi-folder',      text: 'Stapel ansehen' },
                 { icon: 'mdi-folder-plus', text: 'Stapel erstellen' },
-                { icon: 'mdi-settings', text: 'Einstellungen' },
+                { icon: 'mdi-settings',    text: 'Einstellungen' },
             ],
+            navItems: [
+                { icon: 'mdi-magnify', to: '/search' },
+                { icon: 'mdi-account', to: '/auth/login'},
+            ]
         }),
     }
 </script>
 
 <style scoped>
-
+    .v-application a, .v-application a:hover {
+        color: inherit;
+        text-decoration: none;
+    }
 </style>
