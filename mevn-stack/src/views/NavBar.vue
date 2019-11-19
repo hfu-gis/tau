@@ -24,31 +24,30 @@
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-action>
-
-                    <v-list-item-content>
+                    <v-list-item-content class='text-left'>
                         <v-list-item-title>{{ item.text }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list>
             <template v-slot:append>
-                <div class="pa-2">
-                    <v-btn block>
-                        <v-icon>mdi-logout</v-icon>
-                        Logout
-                    </v-btn>
-                </div>
+                <v-btn 
+                    depressed 
+                    block
+                    tile
+                    color='error'>
+                    <v-icon 
+                        small
+                        class="pr-2">mdi-logout</v-icon>
+                    Logout
+                </v-btn>
             </template>
         </v-navigation-drawer>
 
         <v-app-bar
             app
-            color="grey darken-3"
+            color="primary"
             dark>
-            <v-img src ="https://upload.wikimedia.org/wikipedia/de/5/57/Hochschule_Furtwangen_HFU_logo.svg"
-                   max-width="150"
-                   max-height="100">
-            </v-img>
-            <v-toolbar-title class="text-uppercase dark">Studycards
+            <v-toolbar-title>Studycards
             </v-toolbar-title>
             <v-spacer />
             <v-list-item-action
