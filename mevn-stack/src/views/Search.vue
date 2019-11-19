@@ -1,156 +1,147 @@
 <template>
-    <div class = "search">
-        <v-container fluid>
+    <v-container>
+        <v-row justify="center">
             <v-data-iterator
-                    :items="items"
-                    :items-per-page.sync="itemsPerPage"
-                    :page="page"
-                    :search="search"
-                    :sort-by="sortBy.toLowerCase()"
-                    :sort-desc="sortDesc"
-                    hide-default-footer
-            >
- <!-- Header-->
+            dark
+            :items="items"
+            :items-per-page.sync="itemsPerPage"
+            :page="page"
+            :search="search"
+            :sort-by="sortBy.toLowerCase()"
+            :sort-desc="sortDesc"
+            hide-default-footer>
+
                 <template v-slot:header>
-                    <v-toolbar
-                            dark
-                            color="#01905A"
-                            class="mb-1"
-                    >
+                    <v-col
+                        cols='12'
+                        sm="6">
                         <v-text-field
-                                v-model="search"
-                                clearable
-                                flat
-                                solo-inverted
-                                hide-details
-                                prepend-inner-icon="mdi-magnify"
-                                label="Suche"
-                        ></v-text-field>
-                        <template v-if="$vuetify.breakpoint.mdAndUp">
+                            light
+                            v-model="search"
+                            clearable
+                            flat
+                            hide-details
+                            label="Search"></v-text-field>
+                        
                             <v-spacer></v-spacer>
                             <v-select
-                                    v-model="sortBy"
-                                    flat
-                                    solo-inverted
-                                    hide-details
-                                    :items="keys"
-                                    prepend-inner-icon="mdi-magnify"
-                                    label="Sortieren nach"
-                            ></v-select>
-
+                                light
+                                v-model="sortBy"
+                                flat
+                                hide-details
+                                :items="keys"
+                                label="Sort by"></v-select>
                             <v-spacer></v-spacer>
                             <v-btn-toggle
-                                    v-model="sortDesc"
-                                    mandatory
-                            >
+                                class='mt-4'
+                                v-model="sortDesc"
+                                mandatory
+                                rounded>
                                 <v-btn
-                                        large
-                                        depressed
-                                        color="grey lighten-1"
-                                        :value="false"
-                                >
-                                    <v-icon>mdi-chevron-up</v-icon>
+                                    x-small
+                                    depressed
+                                    fab
+                                    color="primary"
+                                    :value="false">
+                                    <v-icon>mdi-arrow-up</v-icon>
                                 </v-btn>
                                 <v-btn
-                                        large
-                                        depressed
-                                        color="grey darken-1"
-                                        :value="true"
-                                >
-                                    <v-icon>mdi-chevron-down</v-icon>
+                                    x-small
+                                    depressed
+                                    fab
+                                    color="primary"
+                                    :value="true">
+                                    <v-icon>mdi-arrow-down</v-icon>
                                 </v-btn>
                             </v-btn-toggle>
-                        </template>
-                    </v-toolbar>
+                        
+                    </v-col>
                 </template>
-<!--Props-->
+        
                 <template v-slot:default="props">
-                    <v-row>
-                        <v-col
+                    <v-col>
+                        <v-row>
+                            <v-col
                                 v-for="item in props.items"
                                 :key="item.name"
                                 cols="12"
                                 sm="6"
-                                md="4"
-                                lg="3"
-                        >
-                            <v-card>
+                                md="6"
+                                lg="6">
+                                <v-card light>
                                 <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
 
                                 <v-divider></v-divider>
 
                                 <v-list dense>
                                     <v-list-item
-                                            v-for="(key, index) in filteredKeys"
-                                            :key="index"
-                                    >
-                                        <v-list-item-content :class="{ 'green--text': sortBy === key }">{{ key }}:</v-list-item-content>
-                                        <v-list-item-content class="align-end" :class="{ 'green--text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                                    v-for="(key, index) in filteredKeys"
+                                    :key="index">
+                                    <v-list-item-content :class="{ 'blue--text': sortBy === key }">{{ key }}:</v-list-item-content>
+                                    <v-list-item-content class="align-end" :class="{ 'blue--text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
                                     </v-list-item>
                                 </v-list>
-                            </v-card>
-                        </v-col>
-                    </v-row>
+                                </v-card>
+                            </v-col>
+                        </v-row>
+                    </v-col>
                 </template>
-<!--footer-->
+
                 <template v-slot:footer>
-                    <v-row class="mt-2" align="center" justify="center">
-                        <span class="grey--text">Items per page</span>
-                        <v-menu offset-y>
-                            <template v-slot:activator="{ on }">
+                    <v-col>
+                        <v-row class="pa-3 mt-2" align="center" justify="center">
+                            <span class="grey--text">Items per page</span>
+                            <v-menu offset-y>
+                                <template v-slot:activator="{ on }">
                                 <v-btn
-                                        dark
-                                        text
-                                        color="#01905A"
-                                        class="ml-2"
-                                        v-on="on"
-                                >
+                                    dark
+                                    text
+                                    color="secondary"
+                                    class="ml-2"
+                                    v-on="on">
                                     {{ itemsPerPage }}
                                     <v-icon>mdi-chevron-down</v-icon>
                                 </v-btn>
-                            </template>
-                            <v-list>
+                                </template>
+                                <v-list>
                                 <v-list-item
-                                        v-for="(number, index) in itemsPerPageArray"
-                                        :key="index"
-                                        @click="updateItemsPerPage(number)"
-                                >
+                                    v-for="(number, index) in itemsPerPageArray"
+                                    :key="index"
+                                    @click="updateItemsPerPage(number)">
                                     <v-list-item-title>{{ number }}</v-list-item-title>
                                 </v-list-item>
-                            </v-list>
-                        </v-menu>
+                                </v-list>
+                            </v-menu>
 
-                        <v-spacer></v-spacer>
+                            <v-spacer></v-spacer>
 
-                        <span
-                                class="mr-4
-                                grey--text"
-                        >
-            Seite {{ page }} von {{ numberOfPages }}
-          </span>
-                        <v-btn
+                            <span class="mr-4 grey--text">
+                                Page {{ page }} of {{ numberOfPages }}
+                            </span>
+                            <v-btn
                                 fab
+                                x-small
                                 dark
-                                color="grey lighten-1"
+                                color="primary"
                                 class="mr-1"
-                                @click="formerPage"
-                        >
-                            <v-icon>mdi-chevron-left</v-icon>
-                        </v-btn>
-                        <v-btn
+                                @click="formerPage">
+                                <v-icon>mdi-chevron-left</v-icon>
+                            </v-btn>
+                            <v-btn
                                 fab
+                                x-small
                                 dark
-                                color="grey darken-1"
+                                color="primary"
                                 class="ml-1"
-                                @click="nextPage"
-                        >
-                            <v-icon>mdi-chevron-right</v-icon>
-                        </v-btn>
-                    </v-row>
+                                @click="nextPage">
+                                <v-icon>mdi-chevron-right</v-icon>
+                            </v-btn>
+                        </v-row>
+                    </v-col>
                 </template>
             </v-data-iterator>
-        </v-container>
-    </div>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
