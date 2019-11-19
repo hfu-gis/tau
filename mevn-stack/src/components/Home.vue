@@ -1,5 +1,26 @@
 <template>
     <main>
+        <v-row justify="center">
+            <v-dialog v-model="dialog" scrollable max-width="300px">
+            <v-card>
+                <v-card-title>Freigabe für</v-card-title>
+                <v-divider></v-divider>
+                <v-card-text style="height: 200px;">
+                <v-radio-group 
+                    v-model="dialogm1"
+                    column
+                    multiple>
+                    <v-radio v-for="(person, index) in shared" :key="index" :label="person.name" value=""></v-radio>
+                </v-radio-group>
+                </v-card-text>
+                <v-divider></v-divider>
+                <v-card-actions>
+                <v-btn color="blue darken-1" text @click="dialog = false">Entfernen</v-btn>
+                <v-btn color="blue darken-1" text @click="dialog = false">Schließen</v-btn>
+                </v-card-actions>
+            </v-card>
+            </v-dialog>
+        </v-row>
         <section 
             v-for="(section, index) in sections" 
             :key="index">
@@ -23,7 +44,7 @@
                     <v-btn v-if="section == sections[0]" color="warning" depressed rounded small dark>
                         Bearbeiten
                     </v-btn>
-                    <v-btn color="blue" fab depressed x-small dark>
+                    <v-btn color="blue" fab depressed x-small dark @click.stop="dialog = true">
                         <v-icon>mdi-account-multiple</v-icon>
                     </v-btn>
                 </v-expansion-panel-content>
@@ -37,6 +58,8 @@
     export default {
         data: () => {
             return {
+                dialogm1: '',
+                dialog: false,
                 sections: [
                     {
                         title: "Meine Liste",
@@ -52,6 +75,10 @@
                             {title: "Computergrafik"}
                         ]
                     }
+                ],
+                shared: [
+                    {name: 'Alexandra Schmidt'}, 
+                    {name: 'Peter Klang'}
                 ]
             }
         }
