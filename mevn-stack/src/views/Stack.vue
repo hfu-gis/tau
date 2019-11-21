@@ -6,7 +6,7 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">AUDIOTECH</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>
@@ -22,7 +22,7 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">MATHE</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>
@@ -38,7 +38,7 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">PROG</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>
@@ -54,7 +54,7 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">PHYSIK</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>
@@ -74,12 +74,12 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">GIS</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>
                         <v-flex class="text-xs-center">
-                            <v-btn elevation="3" class='ma-3 green darken-3 white--text'>Ansehen</v-btn>
+                            <v-btn to="/stacks/overview" elevation="3" class='ma-3 green darken-3 white--text'>Ansehen</v-btn>
                         </v-flex>
                     </v-layout>
                 </v-card-actions>
@@ -90,7 +90,7 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">MATHE</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>
@@ -106,7 +106,7 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">UX-DESIGN</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>
@@ -122,7 +122,7 @@
              <v-card elevation="4" class="mx-auto green" width="300" height="200">
                 <v-card-text class="pb-0">
                     <p class="display-2 white--text">CD</p>
-                    <p>200 Cards</p>
+                    <p>200 Stacks</p>
                 </v-card-text>
                 <v-card-actions>
                     <v-layout row wrap align-center>

@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Landing from '../components/Landing.vue'
 import Home from '../views/Home.vue'
 import Stack from '../views/Stack.vue'
+import StackOverview from '../views/Stackoverview.vue'
+import StackView from '../views/Stackview.vue'
 import Search from '../views/Search'
 import Login from '../components/Login.vue'
 import Dashboard from '../components/Dashboard.vue'
@@ -48,6 +50,16 @@ const routes = [
     path: '/search',
     name: 'search',
     component: Search
+  },
+  {
+    path: '/stacks/overview',
+    name: 'stacksoverview',
+    component: StackOverview
+  },
+  {
+    path: '/stacks/view',
+    name: 'stacksview',
+    component: StackView
   },
 ]
 
