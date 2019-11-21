@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import NavBar from '@/views/NavBar'
+  import NavBar from '@/components/NavBar'
 
   export default {
     name:'App',
@@ -19,8 +19,10 @@
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

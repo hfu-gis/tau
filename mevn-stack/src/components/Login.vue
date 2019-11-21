@@ -25,19 +25,18 @@
 </template>
 
 <script>
-export default {
-  name: 'login',
-  data: () => ({
-    isLoading: false
-  }),
-  props: {},
-  methods: {
-    validate () {
-      this.isLoading = true
+  export default {
+    name: 'login',
+    data: () => ({
+      isLoading: false
+    }),
+    props: {},
+    methods: {
+      validate () {
+        this.isLoading = true
+      }
     }
   }
-}
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
