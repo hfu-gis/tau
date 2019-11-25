@@ -1,6 +1,5 @@
 <template>
     <v-container>
-        <v-row justify="center">
             <v-data-iterator
             dark
             :items="items"
@@ -65,9 +64,9 @@
                                 v-for="item in props.items"
                                 :key="item.name"
                                 cols="12"
-                                sm="6"
+                                sm="12"
                                 md="6"
-                                lg="6">
+                                >
                                 <v-card light>
                                 <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
 
@@ -140,7 +139,7 @@
                     </v-col>
                 </template>
             </v-data-iterator>
-        </v-row>
+
     </v-container>
 </template>
 
@@ -162,68 +161,7 @@
                     'Karten',
                     'Semester',
                 ],
-                items: [
-                    {
-                        typ: 'Stapel',
-                        name: 'BWL',
-                        karten: 159,
-                        semester: 1.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'Mathe1',
-                        karten: 19,
-                        semester: 1.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'Physik',
-                        karten: 119,
-                        semester: 1.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'VideoTech',
-                        karten: 100,
-                        semester: 1.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'AudioTech',
-                        karten: 199,
-                        semester: 1.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'GIS',
-                        karten: 129,
-                        semester: 2.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'Prog',
-                        karten: 159,
-                        semester: 1.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'UXD',
-                        karten: 259,
-                        semester: 2.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'Mathe2',
-                        karten: 159,
-                        semester: 2.0,
-                    },
-                    {
-                        typ: 'Stapel',
-                        name: 'CompGraf',
-                        karten: 152,
-                        semester: 2.0,
-                    },
-                ],
+        items: [],
             }
         },
         computed: {
@@ -245,7 +183,9 @@
                 this.itemsPerPage = number
             },
         },
-
+    created() {
+            this.items = require('../assets/data/search')
+    }
 
     }
 </script>
