@@ -11,6 +11,7 @@
           label='Passwort'
           type='password'
           required></v-text-field>
+        <a href="/auth/SignUp">Noch keinen Account?</a>
         <v-switch
           label='Gerät merken'></v-switch>
         <v-btn 

@@ -8,6 +8,7 @@ import Stack         from '@/components/Stack.vue'
 import Search        from '@/components/Search'
 import Login         from '@/components/Login.vue'
 import Stackoverview from '@/components/Stackoverview.vue'
+import SignUp from "@/components/SignUp.vue"
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,7 @@ const routes = [
   { path: '/user/dashboard', component: Home },
 
   { path: '/auth/login', component: Login },
+  { path: '/auth/signup', component: SignUp},
   
   { path: '/home', name:'home', component: Home },
   { path: '/about', name: 'about',     component: () => import('@/components/About.vue') },
