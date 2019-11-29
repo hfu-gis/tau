@@ -64,32 +64,10 @@
 </template>
 
 <script>
+    import home from '../assets/data/home'
     export default {
         data: () => {
-            return {
-                dialogm1: '',
-                dialog: false,
-                sections: [
-                    {
-                        title: "Meine Liste",
-                        items: [
-                            {title: "Grundlagen interaktiver Systeme", id:'123'},
-                            {title: "Computergrafik", id:'456'}
-                        ]
-                    }, 
-                    {
-                        title: "Freigegeben",
-                        items: [
-                            {title: "Grundlagen interaktiver Systeme"},
-                            {title: "Computergrafik"}
-                        ]
-                    }
-                ],
-                shared: [
-                    {name: 'Alexandra Schmidt'}, 
-                    {name: 'Peter Klang'}
-                ]
-            }
+            return home
         }
     }
 </script>

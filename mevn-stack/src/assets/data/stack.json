@@ -1,0 +1,41 @@
+{
+  "data":{
+    "dialog": "false",
+      "headers": [
+        {
+          "text": "Kartentitel",
+          "align": "left",
+          "value": "title"
+        },
+        { "text": "Gesehen", "value": "views", "align": "right"},
+        { "text": "Actions", "value": "action", "sortable": "false", "align": "right" }
+      ],
+      "desserts": "[]",
+      "editedIndex": "-1",
+      "editedItem": {
+        "title": "",
+        "front": "",
+        "back": ""
+      },
+      "defaultItem": {
+        "title": "",
+        "front": "",
+        "back": ""
+      }
+  },
+
+  "cards":[
+      {
+        "title": "Erstellen Vue App",
+        "front": "",
+        "back": "",
+        "views": "159"
+      },
+      {
+        "title": "Erstellen Vue Router",
+        "front": "",
+        "back": "",
+        "views": "159"
+      }
+    ]
+}

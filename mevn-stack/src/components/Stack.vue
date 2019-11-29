@@ -4,7 +4,7 @@
             <v-card>
                 <v-data-table
                     :headers="headers"
-                    :items="desserts"
+                    :items="cards"
                     sort-by="calories"
                     class="elevation-1"
                 >
@@ -73,31 +73,11 @@
 </template>
 
 <script>
+import stack from '../assets/data/stack'
 export default {
-    data: () => ({
-      dialog: false,
-      headers: [
-        {
-          text: 'Kartentitel',
-          align: 'left',
-          value: 'title',
-        },
-        { text: 'Gesehen', value: 'views', align: 'right', },
-        { text: 'Actions', value: 'action', sortable: false, align: 'right', },
-      ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        title: '',
-        front: '',
-        back: ''
+    data () {
+      return stack.data
       },
-      defaultItem: {
-        title: '',
-        front: '',
-        back: ''
-      },
-    }),
 
     computed: {
       formTitle () {
@@ -117,31 +97,18 @@ export default {
 
     methods: {
       initialize () {
-        this.desserts = [
-          {
-            title: 'Erstellen Vue App',
-            front: '',
-            back: '',
-            views: 159,
-          },
-          {
-            title: 'Erstellen Vue Router',
-            front: '',
-            back: '',
-            views: 159,
-          }
-        ]
+        this.cards = stack.cards
       },
 
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
+        this.editedIndex = this.cards.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+        const index = this.cards.indexOf(item)
+        confirm('Are you sure you want to delete this item?') && this.cards.splice(index, 1)
       },
 
       close () {
@@ -154,9 +121,9 @@ export default {
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+          Object.assign(this.cards[this.editedIndex], this.editedItem)
         } else {
-          this.desserts.push(this.editedItem)
+          this.cards.push(this.editedItem)
         }
         this.close()
       },
