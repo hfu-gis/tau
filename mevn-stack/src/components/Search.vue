@@ -64,8 +64,9 @@
                                 v-for="item in props.items"
                                 :key="item.name"
                                 cols="12"
-                                sm="12"
-                                md="6"
+                                xs="12"
+                                sm="6"
+                                lg="3"
                                 >
                                 <v-card light>
                                 <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
@@ -191,5 +192,4 @@
 </script>
 
 <style scoped>
-
 </style>
