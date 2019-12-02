@@ -32,13 +32,16 @@
                 </v-btn>
             </header>
             <v-expansion-panels>
-                <v-expansion-panel
+                <v-expansion-panel 
                 v-for="(item, index) in section.items"
                 :key="index">
+
                 <v-expansion-panel-header>
                     <header class='subtitle-1'>{{ item.title }}</header>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class='text-right'>
+                    <p class='text-left'>Beschreibung: {{item.description}}</p>
+                    <v-divider></v-divider>
                     <v-btn color="primary" depressed rounded small dark>
                         Lernen
                     </v-btn>
@@ -61,13 +64,15 @@
         </section>
         <v-btn
           ref="button"
+            fab
+            depressed   
             fixed
             bottom
             right
           color="primary"
           @click="$vuetify.goTo(0)"
         >
-          scroll
+            <v-icon>mdi-arrow-up</v-icon>
         </v-btn>
     </main>
 </template>
@@ -92,15 +97,15 @@
     }
 
     @media (min-width: 960px) {
-        main { width: 40%; }
+        main { width: 60%; }
     }
 
     @media (min-width: 1264px) {
-        main { width: 30%; }
+        main { width: 70%; }
     }
 
     @media (min-width: 1904px) {
-        main { width: 20%; }
+        main { width: 80%; }
     }
 
     button {
