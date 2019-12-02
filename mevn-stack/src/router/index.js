@@ -24,7 +24,6 @@ const routes = [
   { path: '/stacks/:id/learn/:id-c', name:'s-learn',  component: Home },
 
   { path: '/stackoverview', name:'sadasd',  component: Stackoverview },
-  
 
   { path: '/user/profile',   component: Home },
   { path: '/user/settings',  component: Home },

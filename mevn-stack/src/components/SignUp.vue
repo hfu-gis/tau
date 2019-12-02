@@ -58,7 +58,7 @@
             validate () {
                 this.isLoading = true
             }
-        }
+        },
     }
 </script>
 

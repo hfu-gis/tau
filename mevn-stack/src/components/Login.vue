@@ -26,6 +26,7 @@
 </template>
 
 <script>
+  import db from '../../db.js'
   export default {
     name: 'login',
     data: () => ({
@@ -36,6 +37,11 @@
       validate () {
         this.isLoading = true
       }
+    },
+    created() {
+      db.collection('Users').get().then(data => {
+        console.log(data)
+      })
     }
   }
 </script>

@@ -20,7 +20,7 @@
             
             <v-divider></v-divider>
             <v-list dense>
-                <v-list-item v-for="item in items" :key="item.text" link>
+                <v-list-item v-for="item in items" :key="item.text" link to="item.route">
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-action>
@@ -100,7 +100,7 @@
         data: () => ({
             drawer: false,
             items: [
-                { icon: 'mdi-magnify',     text: 'Suche' },
+                { icon: 'mdi-magnify',     text: 'Suche', route:'/search'},
                 { icon: 'mdi-home',        text: 'Startseite' },
                 { icon: 'mdi-folder',      text: 'Stapel ansehen' },
                 { icon: 'mdi-folder-plus', text: 'Stapel erstellen' },
