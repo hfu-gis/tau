@@ -62,18 +62,6 @@
                 </v-expansion-panel>
             </v-expansion-panels>  
         </section>
-        <v-btn
-          ref="button"
-            fab
-            depressed   
-            fixed
-            bottom
-            right
-          color="primary"
-          @click="$vuetify.goTo(0)"
-        >
-            <v-icon>mdi-arrow-up</v-icon>
-        </v-btn>
     </main>
 </template>
 
