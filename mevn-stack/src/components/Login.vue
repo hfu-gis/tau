@@ -5,9 +5,11 @@
         v-if='!isLoading'
         ref='form'>
         <v-text-field 
+          v-model='email'
           label='E-Mail Adresse'
           required></v-text-field>
         <v-text-field 
+          v-model='password'
           label='Passwort'
           type='password'
           required></v-text-field>
@@ -17,7 +19,7 @@
         <v-btn 
           rounded
           color='primary'
-          @click='validate'>Login</v-btn>
+          @click='auth'>Login</v-btn>
       </v-form>
     </v-card>
 
@@ -26,23 +28,37 @@
 </template>
 
 <script>
-  import db from '../../db.js'
+  import firebase from 'firebase'
+  
   export default {
     name: 'login',
     data: () => ({
-      isLoading: false
+      isLoading: false,
+      isConnected: false,
+      email: '',
+      password: ''
     }),
     props: {},
     methods: {
-      validate () {
+      auth () {
         this.isLoading = true
+        firebase
+        .auth()
+        .signInWithEmailAndPassword(
+          this.email, 
+          this.password
+        )
+        .then(
+          () => {
+            this.$router.push('/')
+          },
+          (err) => {
+            alert('err: ' + err.message)
+          }
+        )
       }
     },
-    created() {
-      db.collection('Users').get().then(data => {
-        console.log(data)
-      })
-    }
+    created() {}
   }
 </script>
 
