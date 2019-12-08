@@ -55,8 +55,20 @@
 
             </v-list-item>
         </v-list>
-
+            <v-btn
+                    class="hidden-xs-only"
+                    depressed
+                    block
+                    tile
+                    to='/auth/login'
+                    color='error'>
+                <v-icon
+                        small
+                        class="pr-2">mdi-logout</v-icon>
+                Logout
+            </v-btn>
     </v-card>
+
 </template>
 
 
