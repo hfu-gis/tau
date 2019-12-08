@@ -14,7 +14,7 @@ import Profile from "@/components/Profile.vue"
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/profile', name:"profile", component: Profile},
+  { path: '/profile', name:'profile', component: Profile},
   { path: '/', redirect: 'home', component: Landing },
   { path: '/search', name:'search', component: Search },
 

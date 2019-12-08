@@ -6,7 +6,7 @@
             right>
             
             <template v-slot:prepend>
-                <v-list-item two-line>
+                <v-list-item two-line to='/profile'>
                     <v-list-item-avatar>
                     <img src="https://randomuser.me/api/portraits/women/81.jpg">
                     </v-list-item-avatar>
@@ -20,7 +20,7 @@
             
             <v-divider></v-divider>
             <v-list dense>
-                <v-list-item v-for="item in items" :key="item.text" link to="item.route">
+                <v-list-item v-for="item in items" :key="item.text" link :to="item.route">
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-action>
@@ -34,10 +34,12 @@
                     depressed 
                     block
                     tile
-                    color='error'>
-                    <v-icon 
+                    color='error'
+                    to='/auth/login'>
+                    <v-icon
                         small
-                        class="pr-2">mdi-logout</v-icon>
+                        class="pr-2">mdi-logout
+                    </v-icon>
                     Logout
                 </v-btn>
             </template>
@@ -101,14 +103,14 @@
             drawer: false,
             items: [
                 { icon: 'mdi-magnify',     text: 'Suche', route:'/search'},
-                { icon: 'mdi-home',        text: 'Startseite' },
-                { icon: 'mdi-folder',      text: 'Stapel ansehen' },
-                { icon: 'mdi-folder-plus', text: 'Stapel erstellen' },
-                { icon: 'mdi-settings',    text: 'Einstellungen' },
+                { icon: 'mdi-home',        text: 'Startseite',route:'/home' },
+                { icon: 'mdi-folder',      text: 'Stapel ansehen',route:'/home' },
+                { icon: 'mdi-folder-plus', text: 'Stapel erstellen',route:'/' },
+                { icon: 'mdi-settings',    text: 'Einstellungen',route:'/' },
             ],
             navItems: [
                 { icon: 'mdi-magnify', to: '/search' },
-                { icon: 'mdi-account', to: '/auth/login'},
+                { icon: 'mdi-account', to: '/profile'},
             ]
         }),
     }
