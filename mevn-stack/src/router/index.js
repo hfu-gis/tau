@@ -9,10 +9,12 @@ import Search        from '@/components/Search'
 import Login         from '@/components/Login.vue'
 import Stackoverview from '@/components/Stackoverview.vue'
 import SignUp from "@/components/SignUp.vue"
+import Profile from "@/components/Profile.vue"
 
 Vue.use(VueRouter)
 
 const routes = [
+  { path: '/profile', name:"profile", component: Profile},
   { path: '/', redirect: 'home', component: Landing },
   { path: '/search', name:'search', component: Search },
 

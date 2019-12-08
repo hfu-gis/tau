@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Gelernte Karten",
+    "icon": "mdi-card-text-outline",
+    "number": 1560
+  },
+  {
+    "title": "Erstellte Karten",
+    "icon": "mdi-card-plus-outline",
+    "number": 156
+  },
+  {
+    "title": "Erstellte Stapel",
+    "icon": "mdi-folder-plus-outline",
+    "number": 15
+  },
+  {
+    "title": "Geteilte Stapel",
+    "icon": "mdi-share",
+    "number": 16
+  }
+]
