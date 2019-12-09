@@ -1,6 +1,6 @@
 {
   "data":{
-    "dialog": "false",
+    "dialog": false,
       "headers": [
         {
           "text": "Kartentitel",
