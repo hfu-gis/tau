@@ -31,13 +31,13 @@
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </header>
-            <v-expansion-panels>
+            <v-expansion-panels multiple >
                 <v-expansion-panel 
                 v-for="(item, index) in section.items"
                 :key="index">
 
                 <v-expansion-panel-header>
-                    <header class='subtitle-1'>{{ item.title }}</header>
+                    <header color="light-green" class='subtitle-1'>{{ item.title }}</header>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class='text-right'>
                     <p class='text-left'>Beschreibung: {{item.description}}</p>
@@ -60,7 +60,7 @@
                     </v-btn>
                 </v-expansion-panel-content>
                 </v-expansion-panel>
-            </v-expansion-panels>  
+            </v-expansion-panels>
         </section>
     </main>
 </template>
