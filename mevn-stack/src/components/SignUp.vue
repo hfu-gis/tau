@@ -1,29 +1,30 @@
 <template>
     <main>
         <v-card class='mt-6'>
-            <v-form
-                    v-if='!isLoading'
-                    ref='form'>
+            <v-form v-if='!isLoading' ref='form'>
+                <!-- <v-text-field
+                    label='Benutzername'
+                    required></v-text-field> -->
                 <v-text-field
-                        label='Benutzername'
-                        required></v-text-field>
+                    v-model='form.email'
+                    label='Email'
+                    required></v-text-field>
                 <v-text-field
-                        label='Email'
-                        required></v-text-field>
+                    label='Passwort'
+                    v-model='form.password.first'
+                    type='password'
+                    required></v-text-field>
                 <v-text-field
-                        label='Passwort'
-                        type='password'
-                        required></v-text-field>
-                <v-text-field
-                        label='Passwort wiederholen'
-                        type='password'
-                        required></v-text-field>
+                    label='Passwort wiederholen'
+                    v-model='form.password.second'
+                    type='password'
+                    required></v-text-field>
                 <v-overflow-btn
-                        class="my-2"
-                        :items="studiengang"
-                        label="Studiengang"
-                        editable
-                        item-value="text"
+                    class="my-2"
+                    :items="studiengang"
+                    label="Studiengang"
+                    editable
+                    item-value="text"
                 ></v-overflow-btn>
                 <v-overflow-btn
                     class="my-2"
@@ -33,9 +34,9 @@
                     item-value="text"
                     ></v-overflow-btn>
                 <v-btn
-                        rounded
-                        color='primary'
-                        @click='validate'>Registrieren</v-btn>
+                    rounded
+                    color='primary'
+                    @click='validate'>Registrieren</v-btn>
             </v-form>
         </v-card>
 
@@ -44,19 +45,42 @@
 </template>
 
 <script>
+    import firebase from 'firebase'
     export default {
         name: "SignUp",
         data: () => ({
             isLoading: false,
-            semester: [
-                '1', '2', '3','4', '5', '6', '7'],
-            studiengang: [
-                'MIB', 'MIM', 'AIN','MKB', 'ITP', 'OMB']
+            semester:    [ '1', '2', '3','4', '5', '6', '7' ],
+            studiengang: [ 'MIB', 'MIM', 'AIN','MKB', 'ITP', 'OMB' ],
+            form: {
+                email:    '',
+                password: {
+                    first:  '',
+                    second: ''
+                }
+            },
         }),
-        props: {},
         methods: {
             validate () {
-                this.isLoading = true
+                if (this.form.password.first == this.form.password.second) {
+                    this.isLoading = true
+                    firebase
+                        .auth()
+                        .createUserWithEmailAndPassword(
+                            this.form.email,
+                            this.form.password.first
+                        )
+                        .then(() => {
+                            this.$router.push('/')
+                        },
+                        err => {
+                            alert(err.message)
+                        })
+                } else {
+                    // Passwords doesn't match
+                    // Put visual Error handling Code here
+                }
+                
             }
         },
     }

@@ -5,11 +5,11 @@
         v-if='!isLoading'
         ref='form'>
         <v-text-field 
-          v-model='email'
+          v-model='form.email'
           label='E-Mail Adresse'
           required></v-text-field>
         <v-text-field 
-          v-model='password'
+          v-model='form.password'
           label='Passwort'
           type='password'
           required></v-text-field>
@@ -35,24 +35,30 @@
     data: () => ({
       isLoading: false,
       isConnected: false,
-      email: '',
-      password: ''
+      // Input hier gespeichert
+      form: {
+        email:    '',
+        password: ''
+      }
     }),
     props: {},
     methods: {
+      // Funktion für Click auf Login
       auth () {
         this.isLoading = true
         firebase
         .auth()
         .signInWithEmailAndPassword(
-          this.email, 
-          this.password
+          this.form.email, 
+          this.form.password
         )
         .then(
           () => {
+            // Success
             this.$router.push('/')
           },
-          (err) => {
+          err => {
+            // Error handling
             alert('err: ' + err.message)
           }
         )

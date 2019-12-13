@@ -12,12 +12,36 @@ import SignUp from "@/components/SignUp.vue"
 import Profile from "@/components/Profile.vue"
 import Cards from "@/components/Cards.vue"
 
+import firebase from 'firebase'
+
 Vue.use(VueRouter)
 
-const routes = [
-  { path: '/profile', name:'profile', component: Profile},
+let routes = [
   { path: '/', redirect: 'home', component: Landing },
-  { path: '/search', name:'search', component: Search },
+  { 
+    path: '/home', 
+    name: 'home', 
+    component: Home,
+    meta: {
+      requiresAuth: true
+    } 
+  },
+  { 
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  { 
+    path: '/search',
+    name: 'search',
+    component: Search,
+    meta: {
+      requiresAuth: true
+    }
+  },
 
   { path: '/stacks/',                name:'stacks',   component: Home, },
   { path: '/stacks/:id',             name:'stack',    component: Stack },
@@ -29,23 +53,44 @@ const routes = [
 
   { path: '/stackoverview', name:'sadasd',  component: Stackoverview },
 
-  { path: '/user/profile',   component: Home },
-  { path: '/user/settings',  component: Home },
-  { path: '/user/dashboard', component: Home },
-
   { path: '/auth/login', component: Login },
   { path: '/auth/signup', component: SignUp},
   
-  { path: '/home', name:'home', component: Home },
   { path: '/about', name: 'about',     component: () => import('@/components/About.vue') },
   
   { path: '/stacks', component: Stack },
 ]
 
-const router = new VueRouter({
+let router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+// Navigation Guards
+router.beforeEach((to, from, next) => {
+  // Check for Routes with requiresAuth
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!firebase.auth().currentUser) {
+      next({
+        path: '/auth/login',
+        // query: { redirect: to.fullPath }
+      });
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresGuest)) {
+      if (firebase.auth().currentUser) {
+        next({
+          path: '/',
+          // query: { redirect: to.fullPath }
+        });
+      } else {
+        next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -27,7 +27,7 @@
                             dark
                     >
                         <v-list-item-content>
-                            <v-list-item-title class="title">Jane Smith</v-list-item-title>
+                            <v-list-item-title class="title">{{ currentUser }}</v-list-item-title>
                             <v-list-item-subtitle>Medieninformatik</v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
@@ -73,13 +73,16 @@
 
 
 <script>
+    import firebase from 'firebase'
     export default {
         name: "Profile",
         data: () => ({
             items: [],
+            currentUser: ''
         }),
         created() {
             this.items = require('../assets/data/profile')
+            this.currentUser = firebase.auth().currentUser.email
         }
     }
 </script>

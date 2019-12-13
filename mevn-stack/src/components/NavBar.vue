@@ -5,21 +5,35 @@
             app
             right>
             
-            <template v-slot:prepend>
+            <template v-if='isLoggedIn' v-slot:prepend>
                 <v-list-item two-line to='/profile'>
                     <v-list-item-avatar>
                     <img src="https://randomuser.me/api/portraits/women/81.jpg">
                     </v-list-item-avatar>
 
                     <v-list-item-content>
-                    <v-list-item-title>Jane Smith</v-list-item-title>
-                    <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+                    <v-list-item-title>{{ currentUser }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </template>
+            <v-btn 
+                v-if='!isLoggedIn'
+                depressed 
+                block
+                tile
+                color='success'
+                link to='/auth/login'>
+                <v-icon
+                    small
+                    class="pr-2">mdi-logout
+                </v-icon>
+                Login
+            </v-btn>
+
+            
             
             <v-divider></v-divider>
-            <v-list dense>
+            <v-list dense v-if='isLoggedIn'>
                 <v-list-item v-for="item in items" :key="item.text" link :to="item.route">
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
@@ -30,12 +44,13 @@
                 </v-list-item>
             </v-list>
             <template v-slot:append>
-                <v-btn 
+                <v-btn
+                    v-if='isLoggedIn'
                     depressed 
                     block
                     tile
                     color='error'
-                    to='/auth/login'>
+                    @click='logout'>
                     <v-icon
                         small
                         class="pr-2">mdi-logout
@@ -55,11 +70,11 @@
                     </router-link>
                 </v-toolbar-title>
             <v-spacer/>
-            <v-list-item-action
+            <v-list-item-action 
                 class='d-none d-sm-flex'
                 v-for="(el, i) in navItems" 
                 :key='i'>
-                <v-btn 
+                <v-btn
                     color='primary' 
                     depressed 
                     x-small 
@@ -94,12 +109,15 @@
 </template>
 
 <script>
+    import firebase from 'firebase'
     export default {
         name: 'NavBar',
         props: {
             source: String,
         },
         data: () => ({
+            isLoggedIn: false,
+            currentUser: '',
             drawer: false,
             items: [
                 { icon: 'mdi-magnify',     text: 'Suche', route:'/search'},
@@ -113,6 +131,19 @@
                 { icon: 'mdi-account', to: '/profile'},
             ]
         }),
+        created() {
+            if(firebase.auth().currentUser) {
+                this.isLoggedIn = true
+                this.currentUser = firebase.auth().currentUser.email
+            }
+        },
+        methods: {
+            logout () {
+                firebase.auth().signOut().then(() => {
+                    this.$router.push('/auth/login')
+                })
+            }
+        }
     }
 </script>
 

@@ -3,11 +3,12 @@ import App from './App.vue'
 
 import vuetify from './plugins/vuetify';
 import router from './router'
+
+import firebase from 'firebase'
+
 Vue.config.productionTip = false
 
-import firebase from 'firebase/app'
-
-let app = ''
+let app;
 
 const firebaseConfig = {
     apiKey:            "AIzaSyAbhabCHS506aXLvv04tkw0sPa9VL5VnCY",
@@ -30,5 +31,3 @@ firebase.auth().onAuthStateChanged(() => {
     }).$mount('#app') 
   }
 })
-
-
