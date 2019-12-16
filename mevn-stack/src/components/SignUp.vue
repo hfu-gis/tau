@@ -45,7 +45,7 @@
 </template>
 
 <script>
-    import firebase from 'firebase'
+    import firebase, { firestore } from 'firebase'
     export default {
         name: "SignUp",
         data: () => ({
@@ -71,6 +71,7 @@
                             this.form.password.first
                         )
                         .then(() => {
+                            this.writeUserData(),
                             this.$router.push('/')
                         },
                         err => {
@@ -81,9 +82,22 @@
                     // Put visual Error handling Code here
                 }
                 
+            },
+            writeUserData() {
+
+                this.sections = [
+                    this.items = [
+                        this.title = ""
+                    ]
+                ]
+                firestore().collection("users").doc(firebase.auth().currentUser.uid).get()
+
+                )
             }
         },
     }
+
+
 </script>
 
 <style scoped>

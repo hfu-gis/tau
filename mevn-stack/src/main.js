@@ -11,13 +11,15 @@ Vue.config.productionTip = false
 let app;
 
 const firebaseConfig = {
-    apiKey:            "AIzaSyAbhabCHS506aXLvv04tkw0sPa9VL5VnCY",
-    authDomain:        "hfu-tau.firebaseapp.com",
-    databaseURL:       "https://hfu-tau.firebaseio.com",
-    projectId:         "hfu-tau",
-    storageBucket:     "hfu-tau.appspot.com",
-    messagingSenderId: "552563339663",
-    appId:             "1:552563339663:web:6026f25eeb1c3456549bfa"
+    apiKey: "AIzaSyCA9WBrAum0Oy7HcapMiuusv-zQhosXsR4",
+    authDomain: "mevn-stack-ac903.firebaseapp.com",
+    databaseURL: "https://mevn-stack-ac903.firebaseio.com",
+    projectId: "mevn-stack-ac903",
+    storageBucket: "mevn-stack-ac903.appspot.com",
+    messagingSenderId: "52572792433",
+    appId: "1:52572792433:web:b46719a48c2acc038e1dd0",
+    measurementId: "G-WNR8P2H98Z"
+
 }
 
 firebase.initializeApp(firebaseConfig)

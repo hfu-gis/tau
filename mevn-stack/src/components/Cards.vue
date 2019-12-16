@@ -2,18 +2,18 @@
   <main>
     <v-card class='mt-6' height="20em">
         <v-card-title>
-            <p class="text-left">Frage</p>
+            <p class="text-left headline">Frage</p>
         </v-card-title>
-        <v-card-text class="">
+        <v-card-text class="title black--text font-weight-light">
             <p>{{question}}</p>
         </v-card-text>
     </v-card>
 
     <v-card class='mt-6' height="20em">
         <v-card-title>
-            <p class="text-left">Antwort</p>
+            <p class="text-left headline">Antwort</p>
         </v-card-title>
-        <v-card-text class="">
+        <v-card-text class="title black--text font-weight-light">
             <p>{{answer}}</p>
         </v-card-text>
     </v-card>
@@ -44,7 +44,8 @@
     }
 
     @media (min-width: 1264px) {
-        main { width: 60%; }
+        main { width: 60%;}
+        
     }
 
     @media (min-width: 1904px) {
