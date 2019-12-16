@@ -66,18 +66,12 @@
 </template>
 
 <script>
-    import firebase, { firestore } from 'firebase'
-
+    import home from '../assets/data/home'
     export default {
         data: () => {
-
-            firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
-                
-            })
-        },
-
+            return home
+        }
     }
-
 </script>
 
 <style scoped>

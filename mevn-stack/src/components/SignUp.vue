@@ -84,15 +84,9 @@
                 
             },
             writeUserData() {
-
-                this.sections = [
-                    this.items = [
-                        this.title = ""
-                    ]
-                ]
-                firestore().collection("users").doc(firebase.auth().currentUser.uid).get()
-
-                )
+                firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+                    username: this.form.email,
+                })
             }
         },
     }
