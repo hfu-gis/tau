@@ -1,5 +1,6 @@
 <template>
     <main>
+        <p>{{title}}</p>
         <v-row justify="center">
             <v-dialog v-model="dialog" scrollable max-width="300px">
             <v-card>
@@ -37,7 +38,7 @@
                 :key="index">
 
                 <v-expansion-panel-header>
-                    <header color="light-green" class='subtitle-1'>{{ item.title }}</header>
+                    <header color="light-green" class='subtitle-1'>{{ title }}</header>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class='text-right'>
                     <p class='text-left'>Beschreibung: {{item.description}}</p>
@@ -66,12 +67,16 @@
 </template>
 
 <script>
-    import home from '../assets/data/home'
+    import firebase, { firestore } from 'firebase'
     export default {
-        data: () => {
-            return home
+        data: () => ({
+                title: ''
+        }),
+        created() {
+            this.title = firestore().collection('users').doc(firebase.auth().currentUser.uid).get()
         }
     }
+    
 </script>
 
 <style scoped>
