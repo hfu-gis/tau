@@ -1,6 +1,5 @@
 <template>
     <main>
-        <p>{{title}}</p>
         <v-row justify="center">
             <v-dialog v-model="dialog" scrollable max-width="300px">
             <v-card>
@@ -24,30 +23,30 @@
         </v-row>
 
         <section 
-            v-for="(section, index) in sections" 
+            v-for="(field, index) in fields" 
             :key="index">
-            <header class='text-left title mb-4 pt-4'>
-                {{ section.title }}
-                <v-btn v-if="section == sections[0]" color="light-green" fab depressed x-small dark>
+                <header class='text-left title mb-4 pt-4'>
+                {{ field }}
+                <v-btn v-if="section == fields[0]" color="light-green" fab depressed x-small dark>
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </header>
-            <v-expansion-panels multiple >
+           <v-expansion-panels multiple >
                 <v-expansion-panel 
-                v-for="(item, index) in section.items"
+                v-for="(subject, index) in subjects"
                 :key="index">
 
                 <v-expansion-panel-header>
-                    <header color="light-green" class='subtitle-1'>{{ title }}</header>
+                    <header color="light-green" class='subtitle-1'>{{ subject }}</header>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class='text-right'>
-                    <p class='text-left'>Beschreibung: {{item.description}}</p>
+                    <p class='text-left'>Beschreibung: {{subject}}</p>
                     <v-divider></v-divider>
                     <v-btn color="primary" depressed rounded small dark>
                         Lernen
                     </v-btn>
                     <v-btn 
-                        v-if="section == sections[0]" 
+                        v-if="section == subjects[0]" 
                         color="warning" 
                         class='ml-2' 
                         depressed 
@@ -70,10 +69,26 @@
     import firebase, { firestore } from 'firebase'
     export default {
         data: () => ({
-                title: ''
+                title: '',
+                subjects: [],
+                fields:[]
         }),
         created() {
-            this.title = firestore().collection('users').doc(firebase.auth().currentUser.uid).get()
+            let ref = firestore().collection('users').doc(firebase.auth().currentUser.uid)
+            ref.get()
+            .then(snapshot => {  //DocSnapshot
+            if (snapshot.exists) {
+                this.subjects = snapshot.get("subjects")
+                this.title = snapshot.get("username")
+                this.fields = snapshot.get("fields")
+            } else {
+                this.title = "error"
+            // snapshot.data() will be undefined in this case
+            }  
+            
+
+        })
+
         }
     }
     
