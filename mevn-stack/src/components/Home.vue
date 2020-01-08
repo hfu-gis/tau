@@ -71,7 +71,7 @@
         data: () => ({
                 title: '',
                 subjects: [],
-                fields:[]
+                fields:["Meine Stapel", "Veröffentlichte Stapel"]
         }),
         created() {
             let ref = firestore().collection('users').doc(firebase.auth().currentUser.uid)
@@ -80,7 +80,6 @@
             if (snapshot.exists) {
                 this.subjects = snapshot.get("subjects")
                 this.title = snapshot.get("username")
-                this.fields = snapshot.get("fields")
             } else {
                 this.title = "error"
             // snapshot.data() will be undefined in this case
