@@ -1,26 +1,13 @@
 <template>
     <main>
-        <v-row justify="center">
-            <v-dialog v-model="dialog" scrollable max-width="300px">
-            <v-card>
-                <v-card-title>Freigabe für</v-card-title>
-                <v-divider></v-divider>
-                <v-card-text style="height: 200px;">
-                <v-radio-group 
-                    v-model="dialogm1"
-                    column
-                    multiple>
-                    <v-radio v-for="(person, index) in shared" :key="index" :label="person.name" value=""></v-radio>
-                </v-radio-group>
-                </v-card-text>
-                <v-divider></v-divider>
-                <v-card-actions>
-                <v-btn color="blue darken-1" text @click="dialog = false">Entfernen</v-btn>
-                <v-btn color="blue darken-1" text @click="dialog = false">Schließen</v-btn>
-                </v-card-actions>
-            </v-card>
-            </v-dialog>
-        </v-row>
+    <!-- MY STACKS  -->
+
+
+    <!-- PUBLISHED -->
+
+
+
+
 
         <section 
             v-for="(field, index) in fields" 
@@ -69,26 +56,22 @@
     import firebase, { firestore } from 'firebase'
     export default {
         data: () => ({
-                title: '',
+                title:    '',
                 subjects: [],
-                fields:["Meine Stapel", "Veröffentlichte Stapel"]
+                fields:   ["Meine Stapel", "Veröffentlichte Stapel"]
         }),
         created() {
             let ref = firestore().collection('users').doc(firebase.auth().currentUser.uid)
             ref.get()
-            .then(snapshot => {  //DocSnapshot
+            .then(snapshot => {
             if (snapshot.exists) {
                 this.subjects = snapshot.get("subjects")
-                this.title = snapshot.get("username")
-            } else {
-                this.title = "error"
-            // snapshot.data() will be undefined in this case
-            }  
-            
-
-        })
-
-        }
+                this.title    = snapshot.get("username")
+                } else {
+                    this.title = "error"
+                }  
+            })
+            }
     }
     
 </script>
