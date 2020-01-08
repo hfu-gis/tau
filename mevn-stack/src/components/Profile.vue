@@ -27,8 +27,9 @@
                             dark
                     >
                         <v-list-item-content>
-                            <v-list-item-title class="title">{{ currentUser }}</v-list-item-title>
-                            <v-list-item-subtitle>Medieninformatik</v-list-item-subtitle>
+                            <v-list-item-title class="title">{{ user.email }}</v-list-item-title>
+                            <v-list-item-subtitle>{{ user.degree.stringValue }}</v-list-item-subtitle>
+							<v-list-item-subtitle>{{ user.semester.integerValue }}.Semester</v-list-item-subtitle>
                         </v-list-item-content>
                     </v-list-item>
                 </v-col>
@@ -55,35 +56,55 @@
 
             </v-list-item>
         </v-list>
-            <v-btn
-                    class="hidden-xs-only"
-                    depressed
-                    block
-                    tile
-                    to='/auth/login'
-                    color='error'>
-                <v-icon
-                        small
-                        class="pr-2">mdi-logout</v-icon>
-                Logout
-            </v-btn>
+		<v-btn
+			class="hidden-xs-only"
+			depressed
+			block
+			tile
+			v-on:click="logout"
+			color='error'>
+			<v-icon
+				small
+				class="pr-2">mdi-logout</v-icon>
+			Logout
+		</v-btn>
     </v-card>
 
 </template>
 
 
 <script>
-    import firebase from 'firebase'
+    import firebase, { firestore } from 'firebase'
     export default {
         name: "Profile",
         data: () => ({
             items: [],
-            currentUser: ''
+			user: {
+				email:    '',
+				id:       '',
+				degree:   '',
+				semester: ''
+			}
         }),
         created() {
-            this.items = require('../assets/data/profile')
-            this.currentUser = firebase.auth().currentUser.email
-        }
+			this.items = require('../assets/data/profile')
+
+			const user = firebase.auth().currentUser
+			this.user.email = user.email
+			this.user.id    = user.uid
+			let ref = firestore().collection('users').doc(this.user.id)
+			ref.get().then(result => {
+				let fields         = result._document.proto.fields
+				this.user.degree   = fields.degree
+				this.user.semester = fields.semester
+			})
+		},
+		methods: {
+			logout () {
+				firebase.logout()
+				this.$router.redirect("/auth/login")
+			}
+		}
     }
 </script>
 
