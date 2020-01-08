@@ -11,6 +11,7 @@ import Stackoverview from '@/components/Stackoverview.vue'
 import SignUp from "@/components/SignUp.vue"
 import Profile from "@/components/Profile.vue"
 import Cards from "@/components/Cards.vue"
+import CreateCard from "@/components/CreateCard.vue"
 
 import firebase from 'firebase'
 
@@ -46,7 +47,7 @@ let routes = [
   { path: '/stacks/',                name:'stacks',   component: Home, },
   { path: '/stacks/:id',             name:'stack',    component: Stack },
   { path: '/stacks/add',             name:'s-create', component: Home },
-  { path: '/stacks/:id/add/card',    name:'c-create', component: Home },
+  { path: '/stacks/:id/add/card',    name:'c-create', component: CreateCard },
   { path: '/stacks/:id/edit/:id-c',  name:'s-edit',   component: Home },
   { path: '/stacks/:id/learn/:id-c', name:'s-learn',  component: Home },
   { path: '/cards',  component: Cards },
