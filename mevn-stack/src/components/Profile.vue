@@ -57,11 +57,10 @@
             </v-list-item>
         </v-list>
 		<v-btn
-			class="hidden-xs-only"
 			depressed
 			block
 			tile
-			v-on:click="logout"
+			@click="logout"
 			color='error'>
 			<v-icon
 				small
@@ -101,8 +100,8 @@
 		},
 		methods: {
 			logout () {
-				firebase.logout()
-				this.$router.redirect("/auth/login")
+                firebase.auth().signOut()
+				this.$router.push("/auth/login")
 			}
 		}
     }
