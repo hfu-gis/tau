@@ -62,14 +62,14 @@
                         <v-row>
                             <v-col
                                 v-for="item in props.items"
-                                :key="item.name"
+                                :key="item.title"
                                 cols="12"
                                 xs="12"
                                 sm="6"
                                 lg="3"
                                 >
                                 <v-card light>
-                                <v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
+                                <v-card-title class="subheading font-weight-bold">{{ item.title }}</v-card-title>
 
                                 <v-divider></v-divider>
 
@@ -145,22 +145,23 @@
 </template>
 
 <script>
+    import { firestore } from 'firebase'
     export default {
         name: "Search",
         data(){
             return {
-                itemsPerPageArray: [4, 8, 12],
+                itemsPerPageArray: [8, 16, 32],
                 search: '',
                 filter: {},
                 sortDesc: false,
                 page: 1,
-                itemsPerPage: 4,
+                itemsPerPage: 8,
                 sortBy: 'name',
                 keys: [
-                    'Name',
-                    'Typ',
-                    'Karten',
-                    'Semester',
+                    'title',
+                    'degree',
+                    'cards',
+                    'semester'
                 ],
         items: [],
             }
@@ -184,10 +185,25 @@
                 this.itemsPerPage = number
             },
         },
-    created() {
-            this.items = require('../assets/data/search')
-    }
-
+        created() {
+            this.isLoading = true
+            let ref = firestore().collection('stacks')
+            ref.get()
+            .then(snapshot => {
+                // eslint-disable-next-line no-console
+                console.log(snapshot.docs)
+                let results = snapshot.docs
+                results.forEach(doc => {
+                    this.items.push({
+                        title:    doc._document.proto.fields.title.stringValue,
+                        degree:   doc._document.proto.fields.degree.stringValue,
+                        semester: doc._document.proto.fields.semester || 1,
+                        cards:    doc._document.proto.fields.stacks || 0,
+                    })
+                })
+            })
+            this.isLoading = false
+        }
     }
 </script>
 
