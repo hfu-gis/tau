@@ -2,6 +2,7 @@
     <v-container>
             <v-data-iterator
             dark
+            v-if="!isLoading"
             :items="items"
             :items-per-page.sync="itemsPerPage"
             :page="page"
@@ -61,8 +62,8 @@
                     <v-col>
                         <v-row>
                             <v-col
-                                v-for="item in props.items"
-                                :key="item.title"
+                                v-for="(item, index) in props.items"
+                                :key="index"
                                 cols="12"
                                 xs="12"
                                 sm="6"
@@ -140,6 +141,8 @@
                     </v-col>
                 </template>
             </v-data-iterator>
+            
+		<v-text-field v-if='isLoading' color="success" loading disabled></v-text-field>
 
     </v-container>
 </template>
@@ -150,16 +153,16 @@
         name: "Search",
         data(){
             return {
+                isLoading: false,
                 itemsPerPageArray: [8, 16, 32],
                 search: '',
                 filter: {},
                 sortDesc: false,
                 page: 1,
                 itemsPerPage: 8,
-                sortBy: 'name',
+                sortBy: 'subject',
                 keys: [
-                    'title',
-                    'degree',
+                    'subject',
                     'cards',
                     'semester'
                 ],
@@ -190,19 +193,17 @@
             let ref = firestore().collection('stacks')
             ref.get()
             .then(snapshot => {
-                // eslint-disable-next-line no-console
-                console.log(snapshot.docs)
                 let results = snapshot.docs
                 results.forEach(doc => {
                     this.items.push({
-                        title:    doc._document.proto.fields.title.stringValue,
-                        degree:   doc._document.proto.fields.degree.stringValue,
-                        semester: doc._document.proto.fields.semester || 1,
-                        cards:    doc._document.proto.fields.stacks || 0,
+                        title:    doc._document.proto.fields.title.stringValue   || "",
+                        subject:  doc._document.proto.fields.subject.stringValue || "",
+                        semester: doc._document.proto.fields.semester            || 1,
+                        cards:    doc._document.proto.fields.stacks              || 0
                     })
                 })
+                this.isLoading = false
             })
-            this.isLoading = false
         }
     }
 </script>

@@ -1,6 +1,13 @@
 <template>
     <main class='mt-3'>
-        <v-container class='text-left'>
+        <v-container 
+		v-if='!isLoading && !err' 
+		class='text-left'>
+			
+			<v-card class='pa-4 mb-4'>
+				<p>Titel: {{ stack.title }}</p>
+				<p>Beschreibung: {{ stack.description }}</p> 
+			</v-card>
             <v-card>
                 <v-data-table
                     :headers="headers"
@@ -69,15 +76,37 @@
                 <v-btn small rounded depressed dark color='error'>Löschen</v-btn>
             </v-card>
         </v-container>
+		<v-text-field v-if='isLoading' color="success" loading disabled></v-text-field>
     </main>
 </template>
 
 <script>
 import stack from '../assets/data/stack'
+import { firestore } from 'firebase'
+
 export default {
     data () {
-      return stack.data
-      },
+		return {
+			dialog: false,
+			isLoading: false,
+			err:       false,
+			errMsg:    "",
+			stack,
+
+			desserts:    "[]",
+			editedIndex: "-1",
+			editedItem: {
+				title: "",
+				front: "",
+				back:  ""
+			},
+			defaultItem: {
+				title: "",
+				front: "",
+				back:  ""
+			}
+		}
+	},
 
     computed: {
       formTitle () {
@@ -92,41 +121,62 @@ export default {
     },
 
     created () {
-      this.initialize()
+		this.isLoading = true
+		this.loadStack()
+		this.initialize()
     },
 
     methods: {
-      initialize () {
-        this.cards = stack.cards
-      },
+		loadStack() {
+			let ref = firestore().collection('stacks').doc(this.$route.params.id)
+			ref.get().then(result => {
+				if (!result._document) {
+					this.err = true
+					this.errMsg = "No Stack found."
+					this.isLoading = false
+				}
+				else {
+					let data = result._document.proto.fields
+					this.stack = {
+						title:       data.title.stringValue,
+						description: data.description.stringValue
+					}
+					this.isLoading = false
+				}
+			})
+		},
 
-      editItem (item) {
-        this.editedIndex = this.cards.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
+		initialize () {
+			this.cards = stack.cards
+		},
 
-      deleteItem (item) {
-        const index = this.cards.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.cards.splice(index, 1)
-      },
+		editItem (item) {
+			this.editedIndex = this.cards.indexOf(item)
+			this.editedItem = Object.assign({}, item)
+			this.dialog = true
+		},
 
-      close () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
-      },
+		deleteItem (item) {
+			const index = this.cards.indexOf(item)
+			confirm('Are you sure you want to delete this item?') && this.cards.splice(index, 1)
+		},
 
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.cards[this.editedIndex], this.editedItem)
-        } else {
-          this.cards.push(this.editedItem)
-        }
-        this.close()
-      },
+		close () {
+			this.dialog = false
+			setTimeout(() => {
+			this.editedItem = Object.assign({}, this.defaultItem)
+			this.editedIndex = -1
+			}, 300)
+		},
+
+		save () {
+			if (this.editedIndex > -1) {
+			Object.assign(this.cards[this.editedIndex], this.editedItem)
+			} else {
+			this.cards.push(this.editedItem)
+			}
+			this.close()
+		},
     },
   }
 </script>
