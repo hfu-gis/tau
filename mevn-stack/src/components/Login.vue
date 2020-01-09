@@ -1,6 +1,6 @@
 <template>
   <main>
-    <v-card class='mt-6'>
+    <v-card class='mt-8'>
       <v-form
         v-if='!isLoading'
         ref='form'>
