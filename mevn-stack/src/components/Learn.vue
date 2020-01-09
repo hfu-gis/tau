@@ -1,17 +1,6 @@
 <template>
     <v-container fluid>
-        <v-row>
-        <v-col
-                class="mx-auto"
-                cols="12"
-                xs="12"
-                sm="9"
-                md="9"
-                lg="6"
-        >
 
-        </v-col>
-        </v-row>
         <v-row>
             <v-col
                     class="mx-auto"
@@ -37,7 +26,7 @@
                     <v-card-title class="subheading font-weight-bold" v-text="item.frage"></v-card-title>
                 </v-card>
             </v-col>
-        </v-row>
+        </v-row>+
         <v-row>
             <v-col
                     class="mx-auto"
@@ -51,8 +40,12 @@
                         :key="item.antwort"
                         elevation="12"
                         class="pa-12"
-                         light>
-                        <v-card-title v-text="item.antwort"></v-card-title>
+                         light
+
+                        >
+                        <v-card-title
+                                v-if="isVisible"
+                                v-text="item.antwort"></v-card-title>
 
                 </v-card>
             </v-col>
@@ -64,8 +57,8 @@
                     sm="6"
             >
                 <div class="mx-auto">
-                    <v-btn  depressed color="primary" @click="showAnswer" >Aufdecken</v-btn>
-                    <v-btn class="ma-2" depressed color="primary" @click="nextCard">Nächste Karte</v-btn>
+                    <v-btn  depressed color="primary" @click="openAnswer()" >Aufdecken</v-btn>
+                    <v-btn class="ma-2" depressed color="primary" @click="nextCard()">Nächste Karte</v-btn>
                 </div>
             </v-col>
         </v-row>
@@ -77,16 +70,18 @@
     export default {
         name: "Learn",
         items: [],
+        data: () => ({
+            isVisible: false,
+
+        }),
         methods: {
-            nextCard() {
-               if (this.card + 1 <= this.cardsPerStack()) this.card += 1
+
+            openAnswer(){
+            this.isVisible = true
             },
 
-            cardsPerStack (number) {
-                this.cards = number
-            },
-            showAnswer(){
-            //Antwort aufdecken
+            nextCard(){
+
             }
 
         },
