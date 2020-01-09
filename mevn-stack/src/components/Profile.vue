@@ -1,9 +1,10 @@
 <template>
+<main>
     <v-card
-            class="mx-auto"
-            max-width="434"
-            tile
-    >
+        v-if="!isLoading"
+        class="mx-auto"
+        max-width="434"
+        tile>
         <v-img
                 height="100%"
                 src="https://marmotamaps.com/de/fx/wallpaper/download/alpenberge/Marmotamaps_Wallpaper_MonteViso_Desktop_1920x1080.jpg"
@@ -68,7 +69,8 @@
 			Logout
 		</v-btn>
     </v-card>
-
+    <v-text-field v-if='isLoading' color="success" loading></v-text-field>
+</main>
 </template>
 
 
@@ -77,6 +79,7 @@
     export default {
         name: "Profile",
         data: () => ({
+            isLoading: false,
             items: [],
 			user: {
 				email:    '',
@@ -86,6 +89,7 @@
 			}
         }),
         created() {
+            this.isLoading = true
 			this.items = require('../assets/data/profile')
 
 			const user = firebase.auth().currentUser
@@ -96,7 +100,8 @@
 				let fields         = result._document.proto.fields
 				this.user.degree   = fields.degree
 				this.user.semester = fields.semester
-			})
+                this.isLoading = false
+            })
 		},
 		methods: {
 			logout () {
