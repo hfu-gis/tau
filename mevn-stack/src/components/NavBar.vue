@@ -75,6 +75,7 @@
                 v-for="(el, i) in navItems" 
                 :key='i'>
                 <v-btn
+                    v-if='isLoggedIn'
                     color='primary' 
                     depressed 
                     x-small 
