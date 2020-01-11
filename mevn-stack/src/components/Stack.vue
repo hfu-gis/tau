@@ -6,7 +6,8 @@
 			
 			<v-card class='pa-4 mb-4'>
 				<p>Titel: {{ stack.title }}</p>
-				<p>Beschreibung: {{ stack.description }}</p> 
+				<p>Beschreibung: {{ stack.description }}</p>
+                <v-icon>mdi-cards</v-icon> {{ stack.cards }}
 			</v-card>
             <v-card>
                 <v-data-table
@@ -21,7 +22,14 @@
                         <v-spacer></v-spacer>
                         <v-dialog v-model="dialog" max-width="500px">
                         <template v-slot:activator="{ on }">
-                            <v-btn color="primary" small depressed rounded dark class="mb-2" v-on="on">Neue Karte</v-btn>
+                            <v-btn 
+                                color="primary"
+                                small
+                                depressed
+                                rounded
+                                dark
+                                class="mb-2" 
+                                @click='createStack()'>Neue Karte</v-btn>
                         </template>
                         <v-card>
                             <v-card-title>
@@ -127,6 +135,9 @@ export default {
     },
 
     methods: {
+        createStack() {
+            this.$router.push("/stacks/" + this.$router.currentRoute.params.id + "/add/card")
+        },
 		loadStack() {
 			let ref = firestore().collection('stacks').doc(this.$route.params.id)
 			ref.get().then(result => {
@@ -136,10 +147,15 @@ export default {
 					this.isLoading = false
 				}
 				else {
-					let data = result._document.proto.fields
+                    let data = result._document.proto.fields
+                    let arr = data.cards.arrayValue.values
+                    if (!arr) {
+                        arr = []
+                    }
 					this.stack = {
 						title:       data.title.stringValue,
-						description: data.description.stringValue
+                        description: data.description.stringValue,
+                        cards: arr.length
 					}
 					this.isLoading = false
 				}

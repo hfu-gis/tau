@@ -67,21 +67,20 @@
                                 cols="12"
                                 xs="12"
                                 sm="6"
-                                lg="3"
-                                >
+                                lg="3">
                                 <v-card light>
-                                <v-card-title class="subheading font-weight-bold">{{ item.title }}</v-card-title>
+                                    <v-card-title class="subheading font-weight-bold">{{ item.title }}</v-card-title>
 
-                                <v-divider></v-divider>
+                                    <v-divider></v-divider>
 
-                                <v-list dense>
-                                    <v-list-item
-                                    v-for="(key, index) in filteredKeys"
-                                    :key="index">
-                                    <v-list-item-content :class="{ 'blue--text': sortBy === key }">{{ key }}:</v-list-item-content>
-                                    <v-list-item-content class="align-end" :class="{ 'blue--text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
-                                    </v-list-item>
-                                </v-list>
+                                    <v-list dense>
+                                        <v-list-item
+                                        v-for="(key, index) in filteredKeys"
+                                        :key="index">
+                                        <v-list-item-content :class="{ 'blue--text': sortBy === key }">{{ key }}:</v-list-item-content>
+                                        <v-list-item-content class="align-end" :class="{ 'blue--text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                                        </v-list-item>
+                                    </v-list>
                                 </v-card>
                             </v-col>
                         </v-row>
@@ -195,11 +194,15 @@
             .then(snapshot => {
                 let results = snapshot.docs
                 results.forEach(doc => {
+                    let arr = doc._document.proto.fields.cards.arrayValue.values
+                    if (!arr) {
+                        arr = []
+                    }
                     this.items.push({
                         title:    doc._document.proto.fields.title.stringValue   || "",
                         subject:  doc._document.proto.fields.subject.stringValue || "",
                         semester: doc._document.proto.fields.semester            || 1,
-                        cards:    doc._document.proto.fields.stacks              || 0
+                        cards:    arr.length
                     })
                 })
                 this.isLoading = false

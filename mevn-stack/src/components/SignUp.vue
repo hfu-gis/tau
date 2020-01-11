@@ -1,8 +1,8 @@
 <template>
     <main>
         <v-alert
-        v-if="err"
-        class='mt-4'
+            v-if="err"
+            class='mt-4'
             prominent
             type="error">
             <v-row v-model='errMsg' align="center">
@@ -10,7 +10,7 @@
                 <v-col class="shrink">
                 </v-col>
             </v-row>
-            </v-alert>
+        </v-alert>
         <v-card class='mt-6'>
             <v-form v-if='!isLoading' ref='form'>
                 <!-- <v-text-field
