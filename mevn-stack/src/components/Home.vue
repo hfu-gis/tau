@@ -58,6 +58,7 @@
                     <p class='text-left'>Beschreibung: {{ stack.description }}</p>
                     <v-divider></v-divider>
                     <div class='mt-2'>
+                        <v-icon>mdi-cards</v-icon> {{ stack.cards }}
                         <v-btn color='primary' depressed rounded small dark>
                             Lernen
                         </v-btn>
@@ -111,6 +112,7 @@
 
 <script>
     import firebase, { firestore } from 'firebase'
+    
     export default {
         data: () => ({
             isLoading: false,
@@ -145,13 +147,17 @@
                 let results = snapshot.docs
                 // Loop through each Result
                 results.forEach(doc => {
+                    let arr = doc._document.proto.fields.cards.arrayValue.values
+                    if (!arr) {
+                        arr = []
+                    }
                     // Push Each Result into the Stacks Array as a Object
                     this.myStacks.push({
                         title:       doc._document.proto.fields.title.stringValue       || "",
                         description: doc._document.proto.fields.description.stringValue || "",
                         subject:     doc._document.proto.fields.subject.stringValue     || "",
                         semester:    doc._document.proto.fields.semester                || 1,
-                        cards:       doc._document.proto.fields.stacks                  || 0,
+                        cards:       arr.length,
                         id:          doc.id
                     })
                 })
@@ -164,13 +170,17 @@
                 let results = snapshot.docs
                 // Loop through each Result
                 results.forEach(doc => {
+                    let arr = doc._document.proto.fields.cards.arrayValue.values
+                    if (!arr) {
+                        arr = []
+                    }
                     // Push Each Result into the Stacks Array as a Object
                     this.publicStacks.push({
                         title:       doc._document.proto.fields.title.stringValue       || "",
                         description: doc._document.proto.fields.description.stringValue || "",
                         subject:     doc._document.proto.fields.subject.stringValue     || "",
                         semester:    doc._document.proto.fields.semester                || 1,
-                        cards:       doc._document.proto.fields.stacks                  || 0,
+                        cards:       arr.length,
                         id:          doc.id
                     })
                 })
@@ -182,13 +192,17 @@
                 let results = snapshot.docs
                 // Loop through each Result
                 results.forEach(doc => {
+                    let arr = doc._document.proto.fields.cards.arrayValue.values
+                    if (!arr) {
+                        arr = []
+                    }
                     // Push Each Result into the Stacks Array as a Object
                     this.publicStacks.push({
                         title:       doc._document.proto.fields.title.stringValue       || "",
                         description: doc._document.proto.fields.description.stringValue || "",
                         subject:     doc._document.proto.fields.subject.stringValue     || "",
                         semester:    doc._document.proto.fields.semester                || 1,
-                        cards:       doc._document.proto.fields.stacks                  || 0,
+                        cards:       arr.length,
                         id:          doc.id
                     })
                 })
@@ -200,6 +214,7 @@
         methods:{
             // Create a Stack and Save on DB
             saveStack() {
+                this.isLoading = true
                 let userId = firebase.auth().currentUser.uid
                 // To Collection Stacks
                 firestore().collection("stacks").doc()
@@ -211,6 +226,7 @@
                     description: this.stackForm.description,
                     subject:     this.stackForm.subject
                 })
+                this.$router.go()
             }
         }
     }
