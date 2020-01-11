@@ -1,6 +1,6 @@
 <template>
     <main>
-        <v-row justify="center">
+        <v-row justify="center" v-if='!isLoading'>
             <v-dialog 
                 v-model="dialog" 
                 persistent 
@@ -39,7 +39,7 @@
 
 
     <!-- MY STACKS  -->
-        <section>
+        <section v-if='!isLoading'>
             <header class='text-left title mb-4 pt-4'>
                 Meine Stapel
                 <v-btn color="light-green" fab depressed x-small dark>
@@ -48,7 +48,7 @@
             </header>
             <v-expansion-panels multiple >
                 <v-expansion-panel 
-                v-for="(stack, index) in stacks"
+                v-for="(stack, index) in myStacks"
                 :key="index">
 
                 <v-expansion-panel-header>
@@ -70,9 +70,6 @@
                             dark 
                             link 
                             :to="'/stacks/' + stack.id">Bearbeiten</v-btn>
-                        <v-btn color="blue" fab depressed x-small dark @click.stop="dialog = true">
-                            <v-icon>mdi-account-multiple</v-icon>
-                        </v-btn> 
                     </div>
                 </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -80,13 +77,13 @@
         </section>
 
     <!-- PUBLISHED -->
-        <section>
+        <section v-if='!isLoading'>
             <header class='text-left title mb-4 pt-4'>
-                Veröffentlichte Stapel
+                Öffentliche Stapel
             </header>
-           <v-expansion-panels multiple >
+            <v-expansion-panels multiple >
                 <v-expansion-panel 
-                v-for="(stack, index) in stacks"
+                v-for="(stack, index) in publicStacks"
                 :key="index">
 
                 <v-expansion-panel-header>
@@ -95,12 +92,11 @@
                 <v-expansion-panel-content class='text-right'>
                     <p class='text-left'>Beschreibung: {{ stack.description }}</p>
                     <v-divider></v-divider>
-                    <v-btn color="primary" depressed rounded small dark>
-                        Lernen
-                    </v-btn>
-                    <v-btn color="blue" fab depressed x-small dark @click.stop="dialog = true">
-                        <v-icon>mdi-account-multiple</v-icon>
-                    </v-btn>
+                    <div class='mt-2'>
+                        <v-btn color='primary' depressed rounded small dark>
+                            Lernen
+                        </v-btn>
+                    </div>
                 </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-expansion-panels>
@@ -109,7 +105,7 @@
 
 
 
-        
+        <v-text-field v-if='isLoading' color="success" loading></v-text-field>
     </main>
 </template>
 
@@ -119,12 +115,16 @@
         data: () => ({
             isLoading: false,
             dialog:    false,
+
             stackForm: {
                 name:        '',
                 description: '',
                 subject:     '',
             },
-            stacks: [],
+
+            myStacks:     [],
+            publicStacks: [],
+
             fields:   [
                 { title: "Meine Stapel" },
                 { title: "Veröffentlichte Stapel" }
@@ -137,16 +137,53 @@
             // Get User ID
             let userId = firebase.auth().currentUser.uid
             // Get Stacks where the creatorId equals current User ID
-            let ref = firestore().collection('stacks').where("creatorId", "==", userId)
+            let ref = firestore().collection('stacks')
             // Fetch
-            ref.get()
+            ref.where("creatorId", "==", userId).get()
             // Handle Result
             .then(snapshot => {
                 let results = snapshot.docs
                 // Loop through each Result
                 results.forEach(doc => {
                     // Push Each Result into the Stacks Array as a Object
-                    this.stacks.push({
+                    this.myStacks.push({
+                        title:       doc._document.proto.fields.title.stringValue       || "",
+                        description: doc._document.proto.fields.description.stringValue || "",
+                        subject:     doc._document.proto.fields.subject.stringValue     || "",
+                        semester:    doc._document.proto.fields.semester                || 1,
+                        cards:       doc._document.proto.fields.stacks                  || 0,
+                        id:          doc.id
+                    })
+                })
+            })
+
+            // Fetch
+            ref.where("creatorId", ">", userId).get()
+            // Handle Result
+            .then(snapshot => {
+                let results = snapshot.docs
+                // Loop through each Result
+                results.forEach(doc => {
+                    // Push Each Result into the Stacks Array as a Object
+                    this.publicStacks.push({
+                        title:       doc._document.proto.fields.title.stringValue       || "",
+                        description: doc._document.proto.fields.description.stringValue || "",
+                        subject:     doc._document.proto.fields.subject.stringValue     || "",
+                        semester:    doc._document.proto.fields.semester                || 1,
+                        cards:       doc._document.proto.fields.stacks                  || 0,
+                        id:          doc.id
+                    })
+                })
+            })
+
+            ref.where("creatorId", "<", userId).get()
+            // Handle Result
+            .then(snapshot => {
+                let results = snapshot.docs
+                // Loop through each Result
+                results.forEach(doc => {
+                    // Push Each Result into the Stacks Array as a Object
+                    this.publicStacks.push({
                         title:       doc._document.proto.fields.title.stringValue       || "",
                         description: doc._document.proto.fields.description.stringValue || "",
                         subject:     doc._document.proto.fields.subject.stringValue     || "",
