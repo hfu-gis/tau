@@ -22,7 +22,6 @@
                 </article>
             </v-card>
             <v-btn
-                tile
                 @click="logout"
                 color='error'>
                 <v-icon
