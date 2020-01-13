@@ -24,9 +24,14 @@
                     <p class='subtitle-1'>Karten</p>
                     <v-divider class='mb-4'></v-divider>
                     <!-- Each Card -->
-                    <article v-for='(card, index) in stack.cards' :key='index'>
-                        <p>{{ index }} - {{ card.mapValue.fields.question.stringValue.substring(0, 50) }}...</p>
-                    </article>
+                    <section v-if="stack.cards.length > 0">
+                        <article v-for='(card, index) in stack.cards' :key='index'>
+                            <p>{{ index + 1 }} - {{ card.mapValue.fields.question.stringValue.substring(0, 50) }}...</p>
+                        </article>
+                    </section>
+                    <section v-if='stack.cards.length == 0'>
+                        Noch keine Karten verfügbar
+                    </section>
                 </v-card>
             </section>
 
