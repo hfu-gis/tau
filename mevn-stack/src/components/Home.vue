@@ -1,5 +1,6 @@
 <template>
     <main>
+        {{j}}
         <v-row justify="center">
             <v-dialog v-model="dialog" persistent max-width="600px">
                 <v-card>
@@ -41,14 +42,14 @@
             </header>
             <v-expansion-panels multiple >
                 <v-expansion-panel 
-                v-for="(subject, index) in subjects"
+                v-for="(stack, index) in stacks"
                 :key="index">
 
                 <v-expansion-panel-header>
-                    <header color="light-green" class='subtitle-1'>{{ subject }}</header>
+                    <header color="light-green" class='subtitle-1'><b>[{{stack.subject.stringValue}}] </b> {{ stack.title.stringValue }}</header>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class='text-right'>
-                    <p class='text-left'>Beschreibung: {{subject}}</p>
+                    <p class='text-left'>Beschreibung: {{stack.description.stringValue}}</p>
                     <v-divider></v-divider>
                     <v-btn color="primary" depressed rounded small dark>
                         Lernen
@@ -61,7 +62,7 @@
                         small 
                         dark 
                         link 
-                        :to="'/stacks/' + item.id">Bearbeiten</v-btn>
+                        :to="'/stacks/'">Bearbeiten</v-btn>
                     <v-btn color="blue" fab depressed x-small dark @click.stop="dialog = true">
                         <v-icon>mdi-account-multiple</v-icon>
                     </v-btn>
@@ -77,20 +78,17 @@
             </header>
            <v-expansion-panels multiple >
                 <v-expansion-panel 
-                v-for="(subject, index) in subjects"
+                v-for="(stack, index) in publish"
                 :key="index">
 
-                <v-expansion-panel-header>
-                    <header color="light-green" class='subtitle-1'>{{ subject }}</header>
+                 <v-expansion-panel-header>
+                    <header color="light-green" class='subtitle-1'><b>[{{stack.subject.stringValue}}] </b> {{ stack.title.stringValue }}</header>
                 </v-expansion-panel-header>
                 <v-expansion-panel-content class='text-right'>
-                    <p class='text-left'>Beschreibung: {{subject}}</p>
+                    <p class='text-left'>Beschreibung: {{stack.description.stringValue}}</p>
                     <v-divider></v-divider>
                     <v-btn color="primary" depressed rounded small dark>
                         Lernen
-                    </v-btn>
-                    <v-btn color="blue" fab depressed x-small dark @click.stop="dialog = true">
-                        <v-icon>mdi-account-multiple</v-icon>
                     </v-btn>
                 </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -108,23 +106,54 @@
     import firebase, { firestore } from 'firebase'
     export default {
         data: () => ({
+                i: 0,
+                j: 0,
                 dialog: false,
                 name:'' ,
                 description: '',
                 subject: '',
-                subjects: [],
+                stacks: [],
+                publish:[],
                 fields:   ["Meine Stapel", "Veröffentlichte Stapel"]
         }),
         created() {
-            let ref = firestore().collection('users').doc(firebase.auth().currentUser.uid)
+
+
+            const userId = firebase.auth().currentUser.uid
+            let ref = firestore().collection('users').doc(userId)
             ref.get()
             .then(snapshot => {
             if (snapshot.exists) {
-                this.subjects = snapshot.get("subjects")
                 this.title    = snapshot.get("username")
                 } else {
                     this.title = "error"
                 }  
+            })
+            let refstacks = firestore().collection("stacks")
+            refstacks.orderBy("createdAt", "desc").get()
+            .then(snapshot => {
+                let results = snapshot.docs
+                results.forEach(doc => {
+                    const docref = doc._document.proto.fields
+                    if(docref.creatorId.stringValue == userId && this.i <= 5){
+                        this.i = this.i + 1
+                        this.stacks.push({
+                        title:  docref.title,
+                        subject: docref.subject,
+                        description: docref.description,
+                        createdAt: docref.createdAt
+                    })
+                    }
+                    else if(docref.creatorId.stringValue != userId && this.j <= 5){
+                        this.j = this.j + 1
+                        this.publish.push({
+                        title:  docref.title,
+                        subject: docref.subject,
+                        description: docref.description,
+                        createdAt: docref.createdAt
+                    })  
+                    }
+                })
             })
             },
 
@@ -134,9 +163,9 @@
                 firestore().collection("stacks").doc()
                 .set({
                     cards:     [],
-                    stackname: this.name,
+                    title: this.name,
                     createdAt: new Date(),
-                    creator:   "/user/" + userId,
+                    creatorId:   userId,
                     description: this.description,
                     subject: this.subject
                 })
