@@ -18,9 +18,9 @@
           depressed 
           small 
           link to="/auth/SignUp">Noch keinen Account?</v-btn>
-        <v-switch
-          label='Gerät merken'></v-switch>
-        <v-btn 
+        <br>
+        <v-btn
+          class='mt-4'
           rounded
           color='primary'
           @click='auth'>Login</v-btn>
@@ -36,6 +36,7 @@
   
   export default {
     name: 'login',
+
     data: () => ({
       isLoading: false,
       isConnected: false,
@@ -45,14 +46,13 @@
         password: ''
       }
     }),
+    
     props: {},
     methods: {
       // Funktion für Click auf Login
       auth () {
         this.isLoading = true
-        firebase
-        .auth()
-        .signInWithEmailAndPassword(
+        firebase.auth().signInWithEmailAndPassword(
           this.form.email, 
           this.form.password
         )
