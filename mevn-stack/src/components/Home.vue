@@ -59,7 +59,7 @@
                     <v-divider></v-divider>
                     <div class='mt-2'>
                         <v-icon>mdi-cards</v-icon> {{ stack.cards }}
-                        <v-btn color='primary' depressed rounded small dark>
+                        <v-btn color='primary' depressed rounded small dark :to="'/stacks/' + stack.id + '/learn/0'">
                             Lernen
                         </v-btn>
                         <v-btn  
@@ -94,7 +94,8 @@
                     <p class='text-left'>Beschreibung: {{ stack.description }}</p>
                     <v-divider></v-divider>
                     <div class='mt-2'>
-                        <v-btn color='primary' depressed rounded small dark>
+                    <v-icon>mdi-cards</v-icon> {{ stack.cards }}
+                        <v-btn color='primary' depressed rounded small dark :to="'/stacks/' + stack.id + '/learn/0'">
                             Lernen
                         </v-btn>
                     </div>
