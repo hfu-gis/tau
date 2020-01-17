@@ -28,6 +28,8 @@
     </v-card>
 
     <v-text-field v-if='isLoading' color="success" loading disabled></v-text-field>
+    <p class="mt-3 headline">Was ist StudyCards?</p>
+    <p>StudyCards ist eine Lernkartenwebseite der HFU in denen Studenten für sich selbst und gleichzeitig für andere Lernkarten Schreiben können.</p>
   </main>
 </template>
 

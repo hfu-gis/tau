@@ -2,7 +2,7 @@
     <main class='mt-3'>
         <v-row justify="center" v-if='!isLoading'>
             <v-dialog 
-                v-model="dialog1" 
+                v-model="dialog" 
                 persistent 
                 max-width="600px">
                 <v-card>
@@ -27,15 +27,35 @@
                                 </v-col>
                             </v-row>
                         </v-container>  
-                        </v-card-text>
-                        <v-card-actions>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                        <v-btn color="blue darken-1" text @click="dialog = false; saveStack()">Save</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
+            <v-row justify="center" v-if='!isLoading'>
+            <v-dialog 
+                v-model="dialog1" 
+                persistent 
+                max-width="600px">
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">Stapel löschen</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <p class="title">Sind Sie sicher das sie den Stapel löschen wollen?</p>
+                    </v-card-text>
+                    <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue darken-1" text @click="dialog1 = false">Close</v-btn>
-                        <v-btn color="blue darken-1" text @click="dialog1 = false; saveStack()">Save</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                    </v-dialog>
-                </v-row>
+                        <v-btn color="blue darken-1" text @click="dialog1 = false; deleteStack()">Löschen</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
         <v-container 
 		v-if='!isLoading && !err' 
 		class='text-left'>
@@ -53,7 +73,7 @@
                     small 
                     dark 
                     link 
-                    @click.stop="dialog1 = true">Bearbeiten</v-btn>
+                    @click.stop="dialog = true">Bearbeiten</v-btn>
                 </div>
 			</v-card>
             
@@ -73,7 +93,7 @@
                     <!-- Each Card -->
                     <section v-if="stack.cards.length > 0">
                         <article v-for='(card, index) in stack.cards' :key='index'>
-                            <p>{{ index + 1 }} - {{ card.mapValue.fields.question.stringValue.substring(0, 50) }}...</p>
+                        <p>{{ index + 1 }} - {{ card.mapValue.fields.question.stringValue.substring(0, 50) }}...</p>
                         </article>
                     </section>
                     <section v-if='stack.cards.length == 0'>
@@ -84,7 +104,7 @@
 
             <v-card class='mt-4 pa-4 text-center'>
                 <v-btn small rounded depressed dark color='primary' :to="$route.path + '/learn/0'">Lernen</v-btn>
-                <v-btn small rounded depressed dark color='error'>Löschen</v-btn>
+                <v-btn small rounded depressed dark color='error' @click.stop="dialog1 = true" >Stapel Löschen</v-btn>
             </v-card>
         </v-container>
 		<v-text-field v-if='isLoading' color="success" loading disabled></v-text-field>
@@ -151,7 +171,6 @@ export default {
 			})
         },
         saveStack() {
-            // To Collection Stacks
             this.isLoading = true
             firestore().collection("stacks").doc(this.$route.params.id)
             .update({
@@ -160,7 +179,13 @@ export default {
                 subject:     this.stackForm.subject
             })
             this.$router.go()
-        },  
+        }, 
+        deleteStack() {
+            this.isLoading = true
+            firestore().collection("stacks").doc(this.$route.params.id)
+            .delete()
+            this.$router.push("/home")  
+        }, 
     },
   }
 </script>
