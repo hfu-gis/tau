@@ -1,8 +1,11 @@
 <template>
+
 <div>
-  <v-card id='timeline-container'>
-    <v-timeline id='timeline'>
-      <v-timeline-item
+
+  <v-card class='mt-lg-12 mt-sm-6 mx-auto'
+          max-width="500">
+
+      <v-card-text
         v-for="(data, i) in timeline"
         :key="i"
         :color="data.color"
@@ -20,13 +23,19 @@
             {{ data.text }}
           </div>
         </div>
-      </v-timeline-item>
-    </v-timeline>
+      </v-card-text>
   </v-card>
+  <v-col class="text-center" >
+  <v-btn   color="primary" dark  x-large
+           link to='/auth/login'>Zum Login</v-btn>
+  </v-col>
 </div>
 </template>
 
 <style>
+  #app{
+    background-image: url("https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+  }
   #timeline-container {
     margin: 2rem 1rem;
   }
@@ -42,23 +51,23 @@ export default {
         {
             color: 'green',
             title: 'Erstelle ein Stapel',
-            text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+            text: 'Erstelle jeweilge Stapel für deine unterschiedlichen Kurse.'
         },
         {
             color: 'blue',
             title: 'Erstelle Lernkarten',
-            text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+            text: 'Befülle deine Stapel mit selbst geschriebenen Lernkarten. Beschrifte jeweils die Frageseite und die Antwortseite. '
         },
         {
             color: 'orange',
             title: 'Lerne jederzeit',
-            text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+            text: 'Ob in der Bahn, im Bus oder in der Universität. Lerne überall und jederzeit ohne schwere und dicke Bücher mitzuschleppen.'
         },
-        {
+          {
             color: 'cyan',
             title: 'Teile deine Stapel',
-            text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
-        }
+            text: 'Teile deine erstellten Stapel mit deinen Freunden um sie zum lernen zu motivieren.'
+          }
       ],
     }),
 }

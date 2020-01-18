@@ -9,8 +9,8 @@ import SignUp     from "@/components/SignUp.vue"
 import Profile    from "@/components/Profile.vue"
 import LearnCards from "@/components/LearnCard.vue"
 import CreateCard from "@/components/CreateCard.vue"
-
-import firebase from 'firebase'
+import Landing    from "@/components/Landing.vue";
+import firebase   from 'firebase'
 
 Vue.use(VueRouter)
 
@@ -40,7 +40,7 @@ let routes = [
       requiresAuth: true
     }
   },
-  
+  { path: '/landing',                       name: 'landing', component: Landing},
   { path: '/stacks/:id',                    name:'stack',    component: Stack },
   { path: '/stacks/add',                    name:'s-create', component: Home },
   { path: '/stacks/:id/add/card',           name:'c-create', component: CreateCard },
