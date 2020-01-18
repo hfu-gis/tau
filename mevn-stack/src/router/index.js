@@ -50,7 +50,7 @@ let routes = [
   { path: '/auth/login',  component: Login },
   { path: '/auth/signup', component: SignUp},
   
-  { path: '/about', name: 'about', component: () => import('@/components/About.vue') },
+
  
 ]
 

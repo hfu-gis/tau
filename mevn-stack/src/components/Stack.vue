@@ -138,9 +138,11 @@ export default {
     },
 
     methods: {
+        //crates stack
         createStack() {
             this.$router.push("/stacks/" + this.$router.currentRoute.params.id + "/add/card")
         },
+        //loads stack
 		loadStack() {
 			let ref = firestore().collection('stacks').doc(this.$route.params.id)
 			ref.get().then(result => {
@@ -170,6 +172,7 @@ export default {
 				}
 			})
         },
+        //safe stack
         saveStack() {
             this.isLoading = true
             firestore().collection("stacks").doc(this.$route.params.id)
@@ -179,7 +182,8 @@ export default {
                 subject:     this.stackForm.subject
             })
             this.$router.go()
-        }, 
+        },
+        //delete stack
         deleteStack() {
             this.isLoading = true
             firestore().collection("stacks").doc(this.$route.params.id)

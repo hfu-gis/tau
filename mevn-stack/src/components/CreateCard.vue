@@ -112,7 +112,7 @@
                 this.dialoug   = true
                 this.isLoading = false
             },
-
+        //Goes back to Stacks
             goToStacks() {
                 this.$router.push("/stacks/" + this.$router.currentRoute.params.id)
             }

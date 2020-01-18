@@ -74,6 +74,7 @@
             err:    false
         }),
         methods: {
+            //validate
             validate () {
                 if ( this.form.password.first == this.form.password.second &&
                      this.form.degree.length > 0 &&
@@ -103,6 +104,7 @@
                 }
                 
             },
+            //write userdata to database
             writeUserData() {
                 const userId = firebase.auth().currentUser.uid
                 firestore().collection("users").doc(userId)

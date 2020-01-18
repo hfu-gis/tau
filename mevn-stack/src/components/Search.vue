@@ -177,12 +177,15 @@
             },
         },
         methods: {
+            //Switch to next site
             nextPage () {
                 if (this.page + 1 <= this.numberOfPages) this.page += 1
             },
+            //switch to former page
             formerPage () {
                 if (this.page - 1 >= 1) this.page -= 1
             },
+            //update number per page
             updateItemsPerPage (number) {
                 this.itemsPerPage = number
             },

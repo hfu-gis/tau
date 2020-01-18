@@ -107,15 +107,18 @@
     },
 
     methods: {
+      //Shows the answer
       makeVisible() {
         this.isVisible = this.isVisible == false ? true : false
       },
+      //goes to previous card
       previous() {
         let no = parseInt(this.currentCard) - 1
         if(this.currentCard > 0) {
           this.$router.push('/stacks/' + this.$router.currentRoute.params.id + '/learn/' + no)
         }
       },
+      //goes to next card
       next() {
         let no = parseInt(this.currentCard) + 1
         if(this.currentCard < this.cards.length - 1) {

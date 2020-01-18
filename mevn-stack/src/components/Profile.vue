@@ -68,6 +68,7 @@
         },
         
 		methods: {
+            //logout
 			logout () {
                 firebase.auth().signOut()
 				this.$router.push("/auth/login")
